@@ -1,1 +1,49 @@
+/* style.css */
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
 
+header {
+    background-color: #111;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    color: #00aaff;
+    margin: 0;
+}
+
+nav a {
+    color: #00aaff;
+    margin-left: 1rem;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #fff;
+}
+
+.hero {
+    padding: 4rem 2rem;
+    text-align: center;
+    background-color: #111;
+}
+
+section {
+    padding: 2rem;
+}
+
+footer {
+    background-color: #111;
+    text-align: center;
+    padding: 1rem;
+    color: #777;
+}
