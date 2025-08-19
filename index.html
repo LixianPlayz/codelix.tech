@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lix Music Player</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Lix Music Player</h1>
+    <button id="login-btn">Login with Spotify</button>
+    <div id="player-section" class="hidden">
+      <div id="visualizer-container">
+        <canvas id="visualizer"></canvas>
+        <div id="song-info">
+          <img id="album-cover" src="" alt="Album Art" />
+          <h2 id="song-title">Song Title</h2>
+          <p id="song-artist">Artist Name</p>
+        </div>
+      </div>
+      <div id="queue-container">
+        <h3>Queue</h3>
+        <ul id="queue-list"></ul>
+      </div>
+    </div>
+  </div>
+  <script src="https://sdk.scdn.co/spotify-player.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
