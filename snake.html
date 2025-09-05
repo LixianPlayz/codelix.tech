@@ -3,175 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snake Game | CodeLix</title>
-    <link rel="stylesheet" href="style.css">
+    <title>CodeLix | Snake Game</title>
     <style>
         body {
-            background: #000;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            color: #fff;
+            background: linear-gradient(135deg, #001f3f, #004d73, #0077b6);
+            display: flex; justify-content: center; align-items: center;
+            height: 100vh; margin: 0; overflow: hidden;
         }
-
-        header {
-            width: 100%;
-            background: #111;
-            padding: 15px 0;
-            text-align: center;
-            box-shadow: 0 0 10px #00aaff;
-        }
-
-        header h1 {
-            color: #00aaff;
-            margin: 0;
-        }
-
-        nav {
-            margin-top: 10px;
-        }
-
-        nav a {
-            color: #00aaff;
-            margin: 0 15px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-        }
-
-        h2 {
-            margin-top: 20px;
-            color: #00aaff;
-        }
-
         canvas {
-            border: 2px solid #00aaff;
-            margin-top: 20px;
-            background: #000;
-        }
-
-        footer {
-            margin-top: 20px;
-            padding: 15px;
-            color: #ccc;
-            font-size: 14px;
+            border: 2px solid #6ee7ff;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(110,231,255,0.7);
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>CodeLix</h1>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="tools.html">Tools & Bots</a>
-            <a href="tutorials.html">Tutorials & Docs</a>
-            <a href="contact.html">Contact</a>
-            <a href="snake.html">Snake Game</a>
-        </nav>
-    </header>
-
-    <h2>Play the Snake Game!</h2>
     <canvas width="400" height="400" id="game"></canvas>
+    <script>
+        var canvas = document.getElementById('game');
+        var context = canvas.getContext('2d');
+        var grid = 16, count = 0;
+        var snake = { x: 160, y: 160, dx: grid, dy: 0, cells: [], maxCells: 4 };
+        var apple = { x: 320, y: 320 };
 
-    <footer>
-        <p>&copy; 2025 CodeLix. All rights reserved.</p>
-    </footer>
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min)) + min;
+        }
 
-<script>
-var canvas = document.getElementById('game');
-var context = canvas.getContext('2d');
-var grid = 16;
-var count = 0;
+        function loop() {
+            requestAnimationFrame(loop);
+            if (++count < 4) return;
+            count = 0;
+            context.clearRect(0, 0, canvas.width, canvas.height);
 
-var snake = {
-  x: 160,
-  y: 160,
-  dx: grid,
-  dy: 0,
-  cells: [],
-  maxCells: 4
-};
-var apple = {
-  x: 320,
-  y: 320
-};
+            snake.x += snake.dx;
+            snake.y += snake.dy;
 
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min)) + min;
-}
+            if (snake.x < 0) snake.x = canvas.width - grid;
+            else if (snake.x >= canvas.width) snake.x = 0;
+            if (snake.y < 0) snake.y = canvas.height - grid;
+            else if (snake.y >= canvas.height) snake.y = 0;
 
-function loop() {
-  requestAnimationFrame(loop);
+            snake.cells.unshift({ x: snake.x, y: snake.y });
+            if (snake.cells.length > snake.maxCells) snake.cells.pop();
 
-  if (++count < 4) return;
+            context.fillStyle = '#ff4d6d';
+            context.fillRect(apple.x, apple.y, grid-1, grid-1);
 
-  count = 0;
-  context.clearRect(0,0,canvas.width,canvas.height);
+            context.fillStyle = '#6ee7ff';
+            snake.cells.forEach(function(cell, index) {
+                context.fillRect(cell.x, cell.y, grid-1, grid-1);
 
-  snake.x += snake.dx;
-  snake.y += snake.dy;
+                if (cell.x === apple.x && cell.y === apple.y) {
+                    snake.maxCells++;
+                    apple.x = getRandomInt(0, 25) * grid;
+                    apple.y = getRandomInt(0, 25) * grid;
+                }
 
-  if (snake.x < 0) snake.x = canvas.width - grid;
-  else if (snake.x >= canvas.width) snake.x = 0;
+                for (var i = index + 1; i < snake.cells.length; i++) {
+                    if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) {
+                        snake.x = 160; snake.y = 160;
+                        snake.cells = []; snake.maxCells = 4;
+                        snake.dx = grid; snake.dy = 0;
+                        apple.x = getRandomInt(0, 25) * grid;
+                        apple.y = getRandomInt(0, 25) * grid;
+                    }
+                }
+            });
+        }
 
-  if (snake.y < 0) snake.y = canvas.height - grid;
-  else if (snake.y >= canvas.height) snake.y = 0;
+        document.addEventListener('keydown', function(e) {
+            if (e.which === 37 && snake.dx === 0) { snake.dx = -grid; snake.dy = 0; }
+            else if (e.which === 38 && snake.dy === 0) { snake.dy = -grid; snake.dx = 0; }
+            else if (e.which === 39 && snake.dx === 0) { snake.dx = grid; snake.dy = 0; }
+            else if (e.which === 40 && snake.dy === 0) { snake.dy = grid; snake.dx = 0; }
+        });
 
-  snake.cells.unshift({x: snake.x, y: snake.y});
-
-  if (snake.cells.length > snake.maxCells) snake.cells.pop();
-
-  context.fillStyle = 'red';
-  context.fillRect(apple.x, apple.y, grid-1, grid-1);
-
-  context.fillStyle = 'green';
-  snake.cells.forEach(function(cell, index) {
-    context.fillRect(cell.x, cell.y, grid-1, grid-1);
-
-    if (cell.x === apple.x && cell.y === apple.y) {
-      snake.maxCells++;
-      apple.x = getRandomInt(0, 25) * grid;
-      apple.y = getRandomInt(0, 25) * grid;
-    }
-
-    for (var i = index + 1; i < snake.cells.length; i++) {
-      if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) {
-        snake.x = 160;
-        snake.y = 160;
-        snake.cells = [];
-        snake.maxCells = 4;
-        snake.dx = grid;
-        snake.dy = 0;
-        apple.x = getRandomInt(0, 25) * grid;
-        apple.y = getRandomInt(0, 25) * grid;
-      }
-    }
-  });
-}
-
-document.addEventListener('keydown', function(e) {
-  if (e.which === 37 && snake.dx === 0) {
-    snake.dx = -grid;
-    snake.dy = 0;
-  } else if (e.which === 38 && snake.dy === 0) {
-    snake.dy = -grid;
-    snake.dx = 0;
-  } else if (e.which === 39 && snake.dx === 0) {
-    snake.dx = grid;
-    snake.dy = 0;
-  } else if (e.which === 40 && snake.dy === 0) {
-    snake.dy = grid;
-    snake.dx = 0;
-  }
-});
-
-requestAnimationFrame(loop);
-</script>
+        requestAnimationFrame(loop);
+    </script>
 </body>
 </html>
