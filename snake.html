@@ -1,33 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snake Game | CodeLix</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Snake Game</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <!-- Navigation Sidebar -->
-    <aside class="sidebar">
-        <h2>CodeLix</h2>
-        <nav>
-            <a href="index.html">🏠 Home</a>
-            <a href="tools.html">🛠 Tools</a>
-            <a href="tutorials.html">📘 Tutorials</a>
-            <a href="contact.html">📧 Contact</a>
-            <a href="snake.html" class="active">🐍 Snake Game</a>
-        </nav>
-    </aside>
+<body class="aquatic-bg">
+  <!-- Vertical Navigation Bar -->
+  <nav class="vertical-nav">
+    <a href="index.html" class="nav-btn">Home</a>
+    <a href="snake.html" class="nav-btn active">Snake</a>
+    <a href="about.html" class="nav-btn">About</a>
+    <a href="contact.html" class="nav-btn">Contact</a>
+  </nav>
 
-    <main>
-        <header>
-            <h1>Snake Game</h1>
-            <p>Play the classic snake game right here on CodeLix!</p>
-        </header>
-        <canvas width="400" height="400" id="game"></canvas>
-    </main>
+  <!-- Snake Game Canvas -->
+  <div class="game-container">
+    <canvas id="game" width="400" height="400"></canvas>
+  </div>
 
-    <script>
+  <script>
     var canvas = document.getElementById('game');
     var context = canvas.getContext('2d');
     var grid = 16;
@@ -52,31 +45,27 @@
 
     function loop() {
       requestAnimationFrame(loop);
-
       if (++count < 4) return;
 
       count = 0;
-      context.clearRect(0,0,canvas.width,canvas.height);
-
+      context.clearRect(0, 0, canvas.width, canvas.height);
       snake.x += snake.dx;
       snake.y += snake.dy;
 
       if (snake.x < 0) snake.x = canvas.width - grid;
       else if (snake.x >= canvas.width) snake.x = 0;
-
       if (snake.y < 0) snake.y = canvas.height - grid;
       else if (snake.y >= canvas.height) snake.y = 0;
 
-      snake.cells.unshift({x: snake.x, y: snake.y});
-
+      snake.cells.unshift({ x: snake.x, y: snake.y });
       if (snake.cells.length > snake.maxCells) snake.cells.pop();
 
       context.fillStyle = 'red';
-      context.fillRect(apple.x, apple.y, grid-1, grid-1);
+      context.fillRect(apple.x, apple.y, grid - 1, grid - 1);
 
-      context.fillStyle = 'lime';
-      snake.cells.forEach(function(cell, index) {
-        context.fillRect(cell.x, cell.y, grid-1, grid-1);
+      context.fillStyle = '#00e6e6';
+      snake.cells.forEach(function (cell, index) {
+        context.fillRect(cell.x, cell.y, grid - 1, grid - 1);
 
         if (cell.x === apple.x && cell.y === apple.y) {
           snake.maxCells++;
@@ -99,23 +88,19 @@
       });
     }
 
-    document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', function (e) {
       if (e.which === 37 && snake.dx === 0) {
-        snake.dx = -grid;
-        snake.dy = 0;
+        snake.dx = -grid; snake.dy = 0;
       } else if (e.which === 38 && snake.dy === 0) {
-        snake.dy = -grid;
-        snake.dx = 0;
+        snake.dy = -grid; snake.dx = 0;
       } else if (e.which === 39 && snake.dx === 0) {
-        snake.dx = grid;
-        snake.dy = 0;
+        snake.dx = grid; snake.dy = 0;
       } else if (e.which === 40 && snake.dy === 0) {
-        snake.dy = grid;
-        snake.dx = 0;
+        snake.dy = grid; snake.dx = 0;
       }
     });
 
     requestAnimationFrame(loop);
-    </script>
+  </script>
 </body>
 </html>
