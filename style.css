@@ -1,40 +1,135 @@
-/* Vertical Navigation Bar */
-.vertical-nav {
-  position: fixed;
-  top: 20px;
-  left: 20px;
+/* ===============================
+   GLOBAL STYLING
+================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  display: flex;
+  background: linear-gradient(135deg, #003b66, #0077b6, #0096c7, #00b4d8);
+  color: #fff;
+  min-height: 100vh;
+  background-size: 400% 400%;
+  animation: gradientShift 12s ease infinite;
+  overflow-x: hidden;
+}
+
+/* Smooth animated gradient background */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ===============================
+   NAVIGATION BAR (LEFT VERTICAL)
+================================= */
+.navbar {
+  width: 220px;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(15px);
+  padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 15px;
-  z-index: 100;
-  background: rgba(0, 30, 60, 0.55);
-  padding: 15px;
-  border-radius: 12px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 15px rgba(0, 180, 255, 0.3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  box-shadow: 3px 0 10px rgba(0, 0, 0, 0.5);
 }
 
-/* Matching Buttons from Homepage */
-.nav-btn {
-  background: linear-gradient(135deg, #0077ff, #00e6e6);
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 8px;
-  font-size: 15px;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 180, 255, 0.4);
-  transition: all 0.25s ease-in-out;
+.navbar h2 {
+  color: #fff;
+  font-size: 22px;
+  font-weight: 700;
   text-align: center;
+  margin-bottom: 20px;
 }
 
-.nav-btn:hover {
-  transform: scale(1.08);
-  box-shadow: 0 6px 20px rgba(0, 180, 255, 0.6);
+/* Buttons inside the navbar */
+.navbar a {
+  display: block;
+  padding: 12px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background: rgba(0, 123, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-.nav-btn.active {
-  border: 2px solid white;
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+.navbar a:hover {
+  background: #00b4d8;
+  transform: scale(1.05);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5);
+}
+
+/* ===============================
+   PAGE CONTENT (FOR NON-HOMEPAGE)
+================================= */
+.content {
+  margin-left: 250px; /* space for navbar */
+  padding: 40px;
+  width: calc(100% - 250px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.content h1 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.content p {
+  font-size: 18px;
+  max-width: 800px;
+  line-height: 1.6;
+  color: #d6f4ff;
+}
+
+/* ===============================
+   HOMEPAGE BUTTON STYLING
+================================= */
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.center-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.center-buttons a {
+  padding: 15px 30px;
+  background: rgba(0, 123, 255, 0.3);
+  border-radius: 15px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.center-buttons a:hover {
+  background: #00b4d8;
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
 }
