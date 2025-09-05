@@ -14,16 +14,18 @@
   box-shadow: 0 4px 15px rgba(0, 180, 255, 0.3);
 }
 
+/* Matching Buttons from Homepage */
 .nav-btn {
   background: linear-gradient(135deg, #0077ff, #00e6e6);
   color: white;
-  text-decoration: none;
-  padding: 10px 18px;
+  border: none;
+  padding: 12px 20px;
   border-radius: 8px;
   font-size: 15px;
   font-weight: bold;
+  cursor: pointer;
   box-shadow: 0 4px 12px rgba(0, 180, 255, 0.4);
-  transition: all 0.2s ease-in-out;
+  transition: all 0.25s ease-in-out;
   text-align: center;
 }
 
@@ -35,18 +37,4 @@
 .nav-btn.active {
   border: 2px solid white;
   box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
-}
-
-/* Game container */
-.game-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-/* Aquatic Gradient Background */
-.aquatic-bg {
-  background: linear-gradient(135deg, #001f3f, #005f7f);
-  background-size: cover;
 }
