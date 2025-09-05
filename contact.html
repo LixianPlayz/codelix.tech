@@ -3,125 +3,85 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CodeLix • Contact</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
+  <title>Contact — CodeLix</title>
+  <meta name="description" content="Contact CodeLix — GitHub, Discord, or send a message via the contact form." />
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="index.html">
-        <svg class="logo" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="g4" x1="0" x2="1"><stop stop-color="#00c2ff" offset="0"/><stop stop-color="#006dff" offset="1"/></linearGradient></defs><circle cx="24" cy="24" r="22" fill="url(#g4)"/></svg>
+  <header class="site-header" role="banner">
+    <div class="nav-inner">
+      <a class="brand" href="index.html" aria-label="CodeLix home">
+        <svg class="logo" width="36" height="36" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="2" y="2" width="20" height="20" rx="4" fill="currentColor" opacity="0.12"/>
+          <path d="M7 8 L11 12 L7 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M13 8 L17 12 L13 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
         <span class="brand-text">CodeLix</span>
       </a>
 
-      <nav class="nav">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="tools.html" class="nav-link">Tools</a>
-        <a href="tutorials.html" class="nav-link">Tutorials</a>
-        <a href="contact.html" class="nav-link active">Contact</a>
-      </nav>
-
-      <button class="nav-toggle" id="nav-toggle-4" aria-label="Toggle navigation">
-        <span></span><span></span><span></span>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation">
+        <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
       </button>
+
+      <nav id="primary-nav" class="primary-nav" role="navigation" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="tools.html">Tools</a></li>
+          <li><a href="tutorials.html">Tutorials</a></li>
+          <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+      </nav>
     </div>
   </header>
 
-  <main class="container main-content">
-    <section class="contact-grid">
-      <div>
-        <h1>Contact & Socials</h1>
-        <p class="lead">Have a question, feedback, or want to collaborate? Send a message or reach out via the links below.</p>
+  <main class="site-main" id="main" role="main">
+    <section class="container">
+      <h1>Contact</h1>
+      <p class="lead">Have a question or want to collaborate? Use the form below or reach out via GitHub / Discord / Email.</p>
 
-        <div class="social-links">
-          <a class="social-link" href="https://github.com/" target="_blank" rel="noopener">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M12 .5C5.7.5.9 5.3.9 11.6c0 4.6 3 8.5 7.2 9.9.5.1.7-.2.7-.5v-1.8c-2.9.6-3.6-1.3-3.6-1.3-.5-1.3-1.1-1.6-1.1-1.6-.9-.6.1-.6.1-.6 1 .1 1.6 1 1.6 1 .9 1.6 2.4 1.1 3 .8.1-.7.3-1.1.6-1.4-2.3-.3-4.6-1.2-4.6-5.4 0-1.2.4-2.1 1.1-2.8-.1-.3-.5-1.4.1-2.9 0 0 .9-.3 3 1.1.9-.3 1.9-.4 2.9-.4 1 0 2 .1 2.9.4 2.1-1.4 3-1.1 3-1.1.6 1.5.2 2.6.1 2.9.7.7 1.1 1.6 1.1 2.8 0 4.2-2.3 5.1-4.6 5.4.3.2.6.8.6 1.7v2.5c0 .3.2.6.7.5 4.2-1.4 7.2-5.3 7.2-9.9C23.1 5.3 18.3.5 12 .5z"/></svg>
-            GitHub
-          </a>
+      <div class="contact-grid">
+        <form id="contact-form" class="card contact-form" novalidate>
+          <h2>Send a message</h2>
 
-          <a class="social-link" href="#" target="_blank" rel="noopener">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M20 6.6c-0.6-0.3-1.4-0.6-2.1-0.8-0.1 0-0.3 0.1-0.3 0.2-0.3 0.9-0.8 2-1.4 2.9-1.8-0.3-3.6-0.3-5.4 0C9.5 8.9 9 7.9 8.7 7c0-0.1-0.1-0.2-0.3-0.2-0.7 0.2-1.5 0.5-2.1 0.8C4 9.2 3 12.3 3.6 15.2c0 0 1 0.8 2.2 1.2 0.2-0.2 0.4-0.4 0.6-0.6-0.4-0.2-0.8-0.6-1-1.1 0.2 0 0.5 0 0.7 0.1 0.4 0.1 0.8 0.2 1.2 0.3 1.8 0.4 3.6 0.6 5.4 0.6s3.6-0.2 5.4-0.6c0.4-0.1 0.8-0.2 1.2-0.3 0.2-0.1 0.5-0.1 0.7-0.1-0.2 0.5-0.6 0.9-1 1.1 0.2 0.2 0.4 0.4 0.6 0.6 1.2-0.4 2.2-1.2 2.2-1.2 0.6-2.9-0.4-6-3.4-8.6zM9.5 13.3c-0.7 0-1.3-0.6-1.3-1.3S8.8 10.7 9.5 10.7 10.8 11.3 10.8 12 10.2 13.3 9.5 13.3zM14.5 13.3c-0.7 0-1.3-0.6-1.3-1.3s0.6-1.3 1.3-1.3 1.3 0.6 1.3 1.3-0.6 1.3-1.3 1.3z"/></svg>
-            Discord
-          </a>
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" placeholder="Your name" required aria-required="true" />
 
-          <a class="social-link" href="#" target="_blank" rel="noopener">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M23 3.1c-0.8 0.4-1.6 0.6-2.4 0.8 0.9-0.5 1.6-1.4 1.9-2.5-0.9 0.6-1.9 1-2.9 1.2-0.9-1-2.3-1.6-3.8-1.6-2.9 0-5.3 2.3-5.3 5.3 0 0.4 0 0.9 0.1 1.3-4.4-0.2-8.3-2.3-10.9-5.3-0.4 0.6-0.6 1.4-0.6 2.1 0 1.8 0.9 3.5 2.2 4.5-0.8 0-1.6-0.2-2.3-0.6 0 0 0 0 0 0.1 0 2.1 1.5 3.9 3.6 4.3-0.4 0.1-0.9 0.2-1.4 0.2-0.3 0-0.6 0-0.9-0.1 0.6 2 2.4 3.4 4.6 3.5-1.7 1.3-3.8 2.1-6.1 2.1-0.4 0-0.8 0-1.2-0.1 2.2 1.4 4.8 2.2 7.6 2.2 9.1 0 14.1-7.5 14.1-14.1v-0.6c1-0.7 1.8-1.6 2.4-2.6z"/></svg>
-            Twitter
-          </a>
-        </div>
-      </div>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="you@example.com" required aria-required="true" />
 
-      <!-- Contact form -->
-      <div class="contact-form card">
-        <h2>Send a Message</h2>
-        <form id="contactForm" action="#" method="post" novalidate>
-          <label>
-            <span>Name</span>
-            <input type="text" name="name" id="name" placeholder="Your name" required>
-          </label>
-
-          <label>
-            <span>Email</span>
-            <input type="email" name="email" id="email" placeholder="you@example.com" required>
-          </label>
-
-          <label>
-            <span>Message</span>
-            <textarea name="message" id="message" rows="6" placeholder="Tell me about your project or question..." required></textarea>
-          </label>
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="6" placeholder="Write your message..." required aria-required="true"></textarea>
 
           <div class="form-actions">
-            <button class="btn primary" type="submit">Send Message</button>
-            <button class="btn ghost" type="reset">Reset</button>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+            <button type="reset" class="btn btn-ghost">Reset</button>
           </div>
 
-          <div id="formStatus" class="form-status" aria-live="polite"></div>
+          <p id="form-feedback" class="muted" aria-live="polite"></p>
         </form>
+
+        <aside class="card contact-info" aria-labelledby="contact-links">
+          <h2 id="contact-links">Quick links</h2>
+          <p><strong>GitHub:</strong> <a href="https://github.com/LixianPlayz" target="_blank" rel="noopener">LixianPlayz</a></p>
+          <p><strong>Discord:</strong> <a href="https://discord.gg/UVypxeTx" target="_blank" rel="noopener">Join the server</a></p>
+          <p><strong>Email:</strong> <a href="mailto:Lixian1109@yahoo.com">Lixian1109@yahoo.com</a></p>
+          <p class="muted">All links open in a new tab where appropriate.</p>
+        </aside>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div>© <span id="year-contact"></span> CodeLix</div>
-      <div class="socials">
-        <a class="social" href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub">
-          <svg viewBox="0 0 24 24" class="icon"><path d="M12 .5C5.7.5.9 5.3.9 11.6c0 4.6 3 8.5 7.2 9.9.5.1.7-.2.7-.5v-1.8c-2.9.6-3.6-1.3-3.6-1.3-.5-1.3-1.1-1.6-1.1-1.6-.9-.6.1-.6.1-.6 1 .1 1.6 1 1.6 1 .9 1.6 2.4 1.1 3 .8.1-.7.3-1.1.6-1.4-2.3-.3-4.6-1.2-4.6-5.4 0-1.2.4-2.1 1.1-2.8-.1-.3-.5-1.4.1-2.9 0 0 .9-.3 3 1.1.9-.3 1.9-.4 2.9-.4 1 0 2 .1 2.9.4 2.1-1.4 3-1.1 3-1.1.6 1.5.2 2.6.1 2.9.7.7 1.1 1.6 1.1 2.8 0 4.2-2.3 5.1-4.6 5.4.3.2.6.8.6 1.7v2.5c0 .3.2.6.7.5 4.2-1.4 7.2-5.3 7.2-9.9C23.1 5.3 18.3.5 12 .5z"/></svg>
-        </a>
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <small>&copy; <span id="year"></span> CodeLix — Built by Lix</small>
       </div>
-    </div>
-  </footer>
-
-  <script>
-    document.getElementById('year-contact').textContent = new Date().getFullYear();
-
-    // Simple client-side validation and status message (no backend)
-    const form = document.getElementById('contactForm');
-    const status = document.getElementById('formStatus');
-
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      // Minimal validation
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const message = document.getElementById('message').value.trim();
-
-      if (!name || !email || !message) {
-        status.textContent = "Please fill out all fields.";
-        status.className = "form-status error";
-        return;
-      }
-
-      // Simulate a send
-      status.textContent = "Thanks — message received (local demo).";
-      status.className = "form-status success";
-      form.reset();
-    });
-
-    document.getElementById('nav-toggle-4').addEventListener('click', () => {
-      document.querySelector('.nav').classList.toggle('open');
-    });
-  </script>
-</body>
-</html>
+      <div class="footer-right">
+        <nav class="socials" aria-label="Social links">
+          <a href="https://github.com/LixianPlayz" target="_blank" rel="noopener" aria-label="GitHub: LixianPlayz">
+            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.73.5.87 5.36.87 11.63c0 4.77 3.09 8.81 7.38 10.24.54.1.74-.24.74-.53 0-.26-.01-1-.02-1.96-3 .65-3.64-1.42-3.64-1.42-.49-1.25-1.2-1.59-1.2-1.59-.98-.67.07-.66.07-.66 1.08.08 1.65 1.11 1.65 1.11.96 1.64 2.51 1.17 3.12.9.1-.7.38-1.17.69-1.44-2.4-.27-4.93-1.2-4.93-5.33 0-1.18.42-2.15 1.11-2.91-.11-.27-.48-1.36.11-2.84 0 0 .9-.29 2.95 1.11.86-.24 1.78-.36 2.69-.36.91 0 1.83.12 2.69.36 2.04-1.4 2.95-1.11 2.95-1.11.59 1.48.22 2.57.11 2.84.69.76 1.11 1.73 1.11 2.91 0 4.14-2.54 5.06-4.96 5.33.39.33.73.97.73 1.95 0 1.41-.01 2.55-.01 2.9 0 .29.2.64.75.53 4.29-1.43 7.38-5.47 7.38-10.24C23.13 5.36 18.27.5 12 .5z"/></svg>
+          </a>
+          <a href="https://discord.gg/UVypxeTx" target="_blank" rel="noopener" aria-label="Discord server">
+            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.317 4.3698A19.7913 19.7913 0 0016.579 3.1a13.0772 13.0772 0 00-.688 1.444c-2.96-.445-5.92-.445-8.877 0A13.77 13.77 0 006.326 3.1 19.736 19.736 0 001.684 4.369c-3.13 4.583-3.09 9.03-.89 13.05 4.03 3.01 8.04 2.46 11.74 1.79.89-.18 1.67-.3 2.42-.3s1.53.12 2.42.3c3.71.67 7.71 1.22 11.74-1.79 2.2-4.02 2.24-8.47-.89-13.05zM8.02 14.6c-1.04 0-1.88-.95-1.88-2.12s.84-2.12 1.88-2.12 1.88.95 1.88 2.12-.84 2.12-1.88 2.12zm7.96 0c
