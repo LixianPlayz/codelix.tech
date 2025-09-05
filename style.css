@@ -1,205 +1,52 @@
-/* =========================================
-   GLOBAL AQUATIC THEME — CODELIX
-   ========================================= */
-
-/* Reset & Base Styling */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
+/* Vertical Navigation Bar */
+.vertical-nav {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  z-index: 100;
+  background: rgba(0, 30, 60, 0.55);
+  padding: 15px;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0, 180, 255, 0.3);
 }
 
-/* Body Styling */
-body {
-    background: linear-gradient(135deg, #001f3f, #004d73, #0077b6);
-    color: #ffffff;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow-x: hidden;
-    position: relative;
+.nav-btn {
+  background: linear-gradient(135deg, #0077ff, #00e6e6);
+  color: white;
+  text-decoration: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0, 180, 255, 0.4);
+  transition: all 0.2s ease-in-out;
+  text-align: center;
 }
 
-/* =========================================
-   FLOATING BUBBLES BACKGROUND
-   ========================================= */
-.bubbles {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: 0;
-    pointer-events: none;
-    overflow: hidden;
+.nav-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(0, 180, 255, 0.6);
 }
 
-.bubble {
-    position: absolute;
-    bottom: -100px;
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 50%;
-    animation: rise 12s infinite ease-in;
+.nav-btn.active {
+  border: 2px solid white;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
 }
 
-@keyframes rise {
-    0% {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(-120vh) scale(1.5);
-        opacity: 0;
-    }
+/* Game container */
+.game-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-/* =========================================
-   HEADERS & TITLES
-   ========================================= */
-header {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    margin-top: 40px;
-}
-
-header h1 {
-    font-size: 2.5rem;
-    color: #6ee7ff;
-    text-shadow: 0 0 15px rgba(110, 231, 255, 0.7);
-}
-
-header p {
-    color: #ccefff;
-    font-size: 1.1rem;
-    margin-top: 5px;
-}
-
-/* =========================================
-   GLASSMORPHIC CARDS
-   ========================================= */
-.card,
-.tool-card,
-.tutorial-card {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(15px);
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.4);
-    transition: transform 0.2s ease, box-shadow 0.3s ease;
-    position: relative;
-    z-index: 2;
-}
-
-.card:hover,
-.tool-card:hover,
-.tutorial-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 35px rgba(0, 180, 216, 0.6);
-}
-
-/* =========================================
-   BUTTONS
-   ========================================= */
-.btn {
-    display: inline-block;
-    background: linear-gradient(135deg, #00b4d8, #0077b6);
-    color: white;
-    padding: 12px 20px;
-    margin-top: 15px;
-    border: none;
-    border-radius: 10px;
-    font-size: 1rem;
-    cursor: pointer;
-    text-decoration: none;
-    transition: 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 180, 216, 0.4);
-}
-
-.btn:hover {
-    background: linear-gradient(135deg, #0096c7, #023e8a);
-    box-shadow: 0 6px 20px rgba(0, 180, 216, 0.6);
-}
-
-/* =========================================
-   GRID LAYOUTS
-   ========================================= */
-.tools-container,
-.tutorials-container {
-    position: relative;
-    z-index: 2;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    width: 90%;
-    max-width: 1200px;
-    margin-top: 30px;
-}
-
-/* =========================================
-   CONTACT PAGE STYLING
-   ========================================= */
-.contact-container {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(15px);
-    padding: 30px;
-    border-radius: 15px;
-    text-align: center;
-    width: 400px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-    position: relative;
-    z-index: 2;
-}
-
-.contact-container h1 {
-    color: #6ee7ff;
-    margin-bottom: 15px;
-    font-size: 2rem;
-}
-
-.contact-container p {
-    color: #ccefff;
-    font-size: 1rem;
-    margin-bottom: 10px;
-}
-
-.contact-container a {
-    color: #00d8ff;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.contact-container a:hover {
-    color: #38bdf8;
-}
-
-/* =========================================
-   SNAKE GAME PAGE
-   ========================================= */
-canvas {
-    border: 2px solid #6ee7ff;
-    border-radius: 12px;
-    box-shadow: 0 0 20px rgba(110, 231, 255, 0.7);
-    background-color: rgba(0, 0, 0, 0.3);
-    position: relative;
-    z-index: 2;
-}
-
-/* =========================================
-   RESPONSIVENESS
-   ========================================= */
-@media (max-width: 768px) {
-    header h1 {
-        font-size: 2rem;
-    }
-
-    .contact-container {
-        width: 90%;
-        padding: 20px;
-    }
-
-    .btn {
-        width: 100%;
-        padding: 10px;
-    }
+/* Aquatic Gradient Background */
+.aquatic-bg {
+  background: linear-gradient(135deg, #001f3f, #005f7f);
+  background-size: cover;
 }
