@@ -1,43 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tools & Bots | CodeLix</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeLix Tools & Bots</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <!-- Navigation Sidebar -->
-    <aside class="sidebar">
-        <h2>CodeLix</h2>
-        <nav>
-            <a href="index.html">🏠 Home</a>
-            <a href="tools.html" class="active">🛠 Tools</a>
-            <a href="tutorials.html">📘 Tutorials</a>
-            <a href="contact.html">📧 Contact</a>
-            <a href="snake.html">🐍 Snake Game</a>
-        </nav>
-    </aside>
+<body class="aquatic-bg">
+  <!-- Vertical Navigation Bar -->
+  <nav class="vertical-nav">
+    <button onclick="location.href='index.html'" class="nav-btn">Home</button>
+    <button onclick="location.href='snake.html'" class="nav-btn">Snake</button>
+    <button onclick="location.href='tools.html'" class="nav-btn active">Tools & Bots</button>
+    <button onclick="location.href='tutorials.html'" class="nav-btn">Tutorials</button>
+    <button onclick="location.href='contact.html'" class="nav-btn">Contact</button>
+  </nav>
 
-    <main>
-        <header>
-            <h1>Tools & Bots</h1>
-            <p>Download tools and invite CodeLix bots to your Discord server.</p>
-        </header>
+  <main class="page-content">
+    <h1>Tools & Bots</h1>
+    <p>Welcome to CodeLix's tools and bots hub! Check out the latest creations:</p>
 
-        <section class="tools-container">
-            <div class="tool-card">
-                <h2>CodeLix Discord Bot</h2>
-                <p>Invite my bot to your server and supercharge your Discord experience.</p>
-                <a class="btn" href="https://discord.com/oauth2/authorize?client_id=YOUR_BOT_ID&scope=bot&permissions=8" target="_blank">Invite Bot</a>
-            </div>
+    <div class="card">
+      <h2>Discord Bot</h2>
+      <p>Invite our custom-built Discord bot to your server and unlock powerful moderation, automation, and fun features.</p>
+      <a href="https://discord.com/oauth2/authorize?client_id=YOUR_BOT_ID&scope=bot" target="_blank" class="nav-btn">Invite Bot</a>
+    </div>
 
-            <div class="tool-card">
-                <h2>Developer Tools</h2>
-                <p>Check out my custom tools for developers and coders.</p>
-                <a class="btn" href="https://github.com/LixianPlayz" target="_blank">View on GitHub</a>
-            </div>
-        </section>
-    </main>
+    <div class="card">
+      <h2>CodeLix Tools</h2>
+      <p>Explore free developer utilities, productivity tools, and coding shortcuts built by us!</p>
+      <a href="#" class="nav-btn">Explore Tools</a>
+    </div>
+  </main>
 </body>
 </html>
