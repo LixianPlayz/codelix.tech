@@ -1,44 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tutorials & Docs | CodeLix</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeLix Tutorials & Docs</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <!-- Navigation Sidebar -->
-    <aside class="sidebar">
-        <h2>CodeLix</h2>
-        <nav>
-            <a href="index.html">🏠 Home</a>
-            <a href="tools.html">🛠 Tools</a>
-            <a href="tutorials.html" class="active">📘 Tutorials</a>
-            <a href="contact.html">📧 Contact</a>
-            <a href="snake.html">🐍 Snake Game</a>
-        </nav>
-    </aside>
+<body class="aquatic-bg">
+  <!-- Vertical Navigation Bar -->
+  <nav class="vertical-nav">
+    <button onclick="location.href='index.html'" class="nav-btn">Home</button>
+    <button onclick="location.href='snake.html'" class="nav-btn">Snake</button>
+    <button onclick="location.href='tools.html'" class="nav-btn">Tools & Bots</button>
+    <button onclick="location.href='tutorials.html'" class="nav-btn active">Tutorials</button>
+    <button onclick="location.href='contact.html'" class="nav-btn">Contact</button>
+  </nav>
 
-    <main>
-        <header>
-            <h1>Tutorials & Docs</h1>
-            <p>Learn coding, Python tricks, and more with these resources.</p>
-        </header>
+  <main class="page-content">
+    <h1>Tutorials & Docs</h1>
+    <p>Level up your coding game with these Python snippets and tutorials:</p>
 
-        <section class="tutorials-container">
-            <div class="tutorial-card">
-                <h2>Fun Python Snippets</h2>
-                <pre>
-print("Fun fact: Python can do this →", [x**2 for x in range(5)])
-                </pre>
-            </div>
+    <div class="card">
+      <h2>Python Fun Fact</h2>
+      <pre><code>
+def cool_trick():
+    return "Did you know? Python allows inline functions!"
+print(cool_trick())
+      </code></pre>
+    </div>
 
-            <div class="tutorial-card">
-                <h2>My YouTube Tutorials</h2>
-                <p>Watch my coding and development tutorials on YouTube.</p>
-                <a class="btn" href="https://www.youtube.com" target="_blank">Watch Tutorials</a>
-            </div>
-        </section>
-    </main>
+    <div class="card">
+      <h2>Recommended YouTube Channels</h2>
+      <ul>
+        <li><a href="https://www.youtube.com/c/FreeCodeCamp" target="_blank">freeCodeCamp</a></li>
+        <li><a href="https://www.youtube.com/c/TheNetNinja" target="_blank">The Net Ninja</a></li>
+        <li><a href="https://www.youtube.com/c/TraversyMedia" target="_blank">Traversy Media</a></li>
+      </ul>
+    </div>
+  </main>
 </body>
 </html>
