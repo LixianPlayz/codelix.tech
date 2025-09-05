@@ -3,36 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeLix - Tutorials & Docs</title>
+    <title>CodeLix | Tutorials & Docs</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body {
+            background: linear-gradient(135deg,#001f3f,#004d73,#0077b6);
+            color: #fff;
+            padding: 50px;
+            overflow-x: hidden;
+        }
+        header { text-align: center; margin-bottom: 25px; }
+        header h1 { font-size: 2.5rem; color: #6ee7ff; text-shadow: 0 0 15px rgba(110,231,255,0.6); }
+        .tutorials-container {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .tutorial-card {
+            background: rgba(255,255,255,0.08); backdrop-filter: blur(15px);
+            padding: 20px; border-radius: 15px; box-shadow: 0 5px 25px rgba(0,0,0,0.4);
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+        }
+        .tutorial-card:hover { transform: scale(1.05); box-shadow: 0 8px 35px rgba(0,180,216,0.6); }
+        .tutorial-card h2 { color: #60e6ff; margin-bottom: 10px; }
+        .tutorial-card p { color: #ccefff; margin-bottom: 10px; }
+        .tutorial-card a {
+            background: linear-gradient(135deg,#00b4d8,#0077b6);
+            color: white; padding: 10px 15px; border-radius: 8px; text-decoration: none;
+            transition: 0.3s;
+        }
+        .tutorial-card a:hover { background: linear-gradient(135deg,#0096c7,#023e8a); }
+    </style>
 </head>
 <body>
     <header>
-        <h1>CodeLix</h1>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="tools.html">Tools & Bots</a>
-            <a href="tutorials.html" class="active">Tutorials & Docs</a>
-            <a href="snake.html">Snake Game</a>
-            <a href="contact.html">Contact</a>
-        </nav>
+        <h1>Tutorials & Docs</h1>
+        <p>Learn coding, automation, and more — with practical examples!</p>
     </header>
 
-    <main>
-        <section class="content">
-            <h2>Tutorials & Documentation</h2>
-            <p>Learn Python, Discord bot development, and fun projects!</p>
-            <ul>
-                <li><a href="https://www.youtube.com/results?search_query=python+tutorial" target="_blank">Python Basics Video</a></li>
-                <li><a href="https://docs.python.org/3/tutorial/" target="_blank">Official Python Docs</a></li>
-                <li><a href="https://discordpy.readthedocs.io/en/stable/" target="_blank">Discord Bot Development</a></li>
-                <li><a href="https://github.com/LixianPlayz" target="_blank">My GitHub Tutorials</a></li>
-            </ul>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2025 CodeLix. All rights reserved.</p>
-    </footer>
+    <div class="tutorials-container">
+        <div class="tutorial-card">
+            <h2>Python Basics</h2>
+            <p>Learn Python fundamentals, from variables to functions.</p>
+            <a href="#">Start Learning</a>
+        </div>
+        <div class="tutorial-card">
+            <h2>Discord Bot Guide</h2>
+            <p>Create your own Discord bot step-by-step using discord.js.</p>
+            <a href="#">Read Guide</a>
+        </div>
+        <div class="tutorial-card">
+            <h2>Web Dev Crash Course</h2>
+            <p>HTML, CSS, and JS essentials explained with examples.</p>
+            <a href="#">Get Started</a>
+        </div>
+    </div>
 </body>
 </html>
