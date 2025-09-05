@@ -3,110 +3,175 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CodeLix • Tools</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
+  <title>Tools — CodeLix</title>
+  <meta name="description" content="Curated Python editors, package managers, and libraries recommended by CodeLix." />
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="index.html">
-        <svg class="logo" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="g2" x1="0" x2="1"><stop stop-color="#00c2ff" offset="0"/><stop stop-color="#006dff" offset="1"/></linearGradient></defs><circle cx="24" cy="24" r="22" fill="url(#g2)"/></svg>
+  <header class="site-header" role="banner">
+    <div class="nav-inner">
+      <a class="brand" href="index.html" aria-label="CodeLix home">
+        <svg class="logo" width="36" height="36" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="2" y="2" width="20" height="20" rx="4" fill="currentColor" opacity="0.12"/>
+          <path d="M7 8 L11 12 L7 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M13 8 L17 12 L13 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
         <span class="brand-text">CodeLix</span>
       </a>
 
-      <nav class="nav">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="tools.html" class="nav-link active">Tools</a>
-        <a href="tutorials.html" class="nav-link">Tutorials</a>
-        <a href="contact.html" class="nav-link">Contact</a>
-      </nav>
-
-      <button class="nav-toggle" id="nav-toggle-2" aria-label="Toggle navigation">
-        <span></span><span></span><span></span>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation">
+        <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
       </button>
+
+      <nav id="primary-nav" class="primary-nav" role="navigation" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="tools.html" class="active">Tools</a></li>
+          <li><a href="tutorials.html">Tutorials</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
     </div>
   </header>
 
-  <main class="container main-content">
-    <section>
-      <h1>Programming Tools (Python)</h1>
-      <p class="lead">A curated list of useful tools and environments for Python development — from beginner to advanced.</p>
+  <main class="site-main" id="main" role="main">
+    <section class="container">
+      <h1>Python Tools & Libraries</h1>
+      <p class="lead">A curated list of editors, package managers, and libraries that are widely useful for beginners and intermediate Python developers.</p>
 
-      <div class="tool-list">
-        <article class="tool card">
-          <h3>Visual Studio Code</h3>
-          <p>Lightweight editor with excellent Python extensions (Pylance, Python extension). Great debugging and integrated terminal.</p>
-          <div class="tool-meta">
-            <span class="pill">Editor</span>
-            <span class="pill">Extensions</span>
+      <section class="tools-grid" aria-label="List of tools">
+        <!-- Card: VS Code -->
+        <article class="card tool-card">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="40" height="40" viewBox="0 0 24 24"><path fill="currentColor" d="M2 6v12l7-6zM22 6L12 12l10 6z"/></svg>
+          </div>
+          <div class="card-body">
+            <h3>Visual Studio Code</h3>
+            <p>Lightweight, extensible editor with excellent Python extensions (IntelliSense, debugging, formatters).</p>
+            <p class="muted">Website: <a href="https://code.visualstudio.com/" target="_blank" rel="noopener">code.visualstudio.com</a></p>
           </div>
         </article>
 
-        <article class="tool card">
-          <h3>PyCharm</h3>
-          <p>Full-featured IDE for Python with smart refactoring, testing integration, and project management. Good for larger projects.</p>
-          <div class="tool-meta">
-            <span class="pill">IDE</span>
-            <span class="pill">Refactor</span>
+        <!-- Card: PyCharm -->
+        <article class="card tool-card">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="40" height="40" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2" fill="currentColor" opacity="0.12"/><path d="M7 8h10v8H7z" stroke="currentColor" stroke-width="0.8" fill="none"/></svg>
+          </div>
+          <div class="card-body">
+            <h3>PyCharm</h3>
+            <p>Intelligent IDE for Python — great refactoring, debugging, and built-in tools for larger projects.</p>
+            <p class="muted">JetBrains product, Community and Professional editions.</p>
           </div>
         </article>
 
-        <article class="tool card">
-          <h3>Jupyter / JupyterLab</h3>
-          <p>Interactive notebooks ideal for data exploration, visualization, and step-by-step learning.</p>
-          <div class="tool-meta">
-            <span class="pill">Notebooks</span>
-            <span class="pill">Data Science</span>
+        <!-- Card: pip -->
+        <article class="card tool-card">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="40" height="40" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="currentColor" opacity="0.06"/><path d="M7 12h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </div>
+          <div class="card-body">
+            <h3>pip</h3>
+            <p>The standard package installer for Python. Install packages quickly with <code>pip install package</code>.</p>
           </div>
         </article>
 
-        <article class="tool card">
-          <h3>pip & virtualenv / venv</h3>
-          <p>Package management and isolated environments — keep dependencies separated per-project.</p>
-          <div class="tool-meta">
-            <span class="pill">Package</span>
-            <span class="pill">Environment</span>
+        <!-- Card: Poetry -->
+        <article class="card tool-card">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="40" height="40" viewBox="0 0 24 24"><path d="M12 3L2 7l10 4 10-4-10-4zM2 17l10 4 10-4" fill="currentColor" opacity="0.06"/><path d="M12 7v10" stroke="currentColor" stroke-width="1.2"/></svg>
+          </div>
+          <div class="card-body">
+            <h3>Poetry</h3>
+            <p>Dependency management and packaging made simple — isolated virtual envs and lock files by default.</p>
+            <p class="muted">Great for reproducible projects.</p>
           </div>
         </article>
 
-        <article class="tool card">
-          <h3>Black & Flake8</h3>
-          <p>Formatting and linting tools to keep code consistent and clean.</p>
-          <div class="tool-meta">
-            <span class="pill">Formatter</span>
-            <span class="pill">Linter</span>
+        <!-- Card: venv -->
+        <article class="card tool-card">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="40" height="40" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" fill="currentColor" opacity="0.06"/><path d="M8 12h8" stroke="currentColor" stroke-width="1.6" /></svg>
+          </div>
+          <div class="card-body">
+            <h3>venv</h3>
+            <p>Built-in virtual environments — keep dependencies per-project and avoid conflicts.</p>
+            <p class="muted">Use: <code>python -m venv .venv</code></p>
           </div>
         </article>
 
-        <article class="tool card">
-          <h3>Git & GitHub</h3>
-          <p>Version control and collaboration. Use branches, commits, and PRs to manage code changes safely.</p>
-          <div class="tool-meta">
-            <span class="pill">VCS</span>
-            <span class="pill">Collaboration</span>
+        <!-- Card: Jupyter -->
+        <article class="card tool-card">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="40" height="40" viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="7" ry="4" fill="currentColor" opacity="0.06"/><path d="M5 12c0 2 3 4 7 4s7-2 7-4" stroke="currentColor" stroke-width="1.2"/></svg>
+          </div>
+          <div class="card-body">
+            <h3>Jupyter</h3>
+            <p>Interactive notebooks for data exploration, learning, and demos. Great for teaching and iterative work.</p>
           </div>
         </article>
-      </div>
+
+        <!-- Card: Black -->
+        <article class="card tool-card">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="40" height="40" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3" fill="currentColor" opacity="0.06"/><path d="M7 12h10" stroke="currentColor" stroke-width="1.4"/></svg>
+          </div>
+          <div class="card-body">
+            <h3>Black</h3>
+            <p>Automatic code formatter — opinionated but saves time and enforces consistent style.</p>
+          </div>
+        </article>
+
+        <!-- Card: pylint -->
+        <article class="card tool-card">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="40" height="40" viewBox="0 0 24 24"><path d="M12 2l9 5v8l-9 7-9-7V7z" fill="currentColor" opacity="0.06"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="card-body">
+            <h3>pylint</h3>
+            <p>Classic linter for finding bugs and enforcing coding standards. Use alongside Black for best effect.</p>
+          </div>
+        </article>
+      </section>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div>© <span id="year-tools"></span> CodeLix</div>
-      <div class="socials">
-        <a class="social" href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub">
-          <svg viewBox="0 0 24 24" class="icon"><path d="M12 .5C5.7.5.9 5.3.9 11.6c0 4.6 3 8.5 7.2 9.9.5.1.7-.2.7-.5v-1.8c-2.9.6-3.6-1.3-3.6-1.3-.5-1.3-1.1-1.6-1.1-1.6-.9-.6.1-.6.1-.6 1 .1 1.6 1 1.6 1 .9 1.6 2.4 1.1 3 .8.1-.7.3-1.1.6-1.4-2.3-.3-4.6-1.2-4.6-5.4 0-1.2.4-2.1 1.1-2.8-.1-.3-.5-1.4.1-2.9 0 0 .9-.3 3 1.1.9-.3 1.9-.4 2.9-.4 1 0 2 .1 2.9.4 2.1-1.4 3-1.1 3-1.1.6 1.5.2 2.6.1 2.9.7.7 1.1 1.6 1.1 2.8 0 4.2-2.3 5.1-4.6 5.4.3.2.6.8.6 1.7v2.5c0 .3.2.6.7.5 4.2-1.4 7.2-5.3 7.2-9.9C23.1 5.3 18.3.5 12 .5z"/></svg>
-        </a>
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <small>&copy; <span id="year"></span> CodeLix — Built by Lix</small>
+      </div>
+      <div class="footer-right">
+        <nav class="socials" aria-label="Social links">
+          <a href="https://github.com/LixianPlayz" target="_blank" rel="noopener" aria-label="GitHub: LixianPlayz">
+            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.73.5.87 5.36.87 11.63c0 4.77 3.09 8.81 7.38 10.24.54.1.74-.24.74-.53 0-.26-.01-1-.02-1.96-3 .65-3.64-1.42-3.64-1.42-.49-1.25-1.2-1.59-1.2-1.59-.98-.67.07-.66.07-.66 1.08.08 1.65 1.11 1.65 1.11.96 1.64 2.51 1.17 3.12.9.1-.7.38-1.17.69-1.44-2.4-.27-4.93-1.2-4.93-5.33 0-1.18.42-2.15 1.11-2.91-.11-.27-.48-1.36.11-2.84 0 0 .9-.29 2.95 1.11.86-.24 1.78-.36 2.69-.36.91 0 1.83.12 2.69.36 2.04-1.4 2.95-1.11 2.95-1.11.59 1.48.22 2.57.11 2.84.69.76 1.11 1.73 1.11 2.91 0 4.14-2.54 5.06-4.96 5.33.39.33.73.97.73 1.95 0 1.41-.01 2.55-.01 2.9 0 .29.2.64.75.53 4.29-1.43 7.38-5.47 7.38-10.24C23.13 5.36 18.27.5 12 .5z"/></svg>
+          </a>
+          <a href="https://discord.gg/UVypxeTx" target="_blank" rel="noopener" aria-label="Discord server">
+            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.317 4.3698A19.7913 19.7913 0 0016.579 3.1a13.0772 13.0772 0 00-.688 1.444c-2.96-.445-5.92-.445-8.877 0A13.77 13.77 0 006.326 3.1 19.736 19.736 0 001.684 4.369c-3.13 4.583-3.09 9.03-.89 13.05 4.03 3.01 8.04 2.46 11.74 1.79.89-.18 1.67-.3 2.42-.3s1.53.12 2.42.3c3.71.67 7.71 1.22 11.74-1.79 2.2-4.02 2.24-8.47-.89-13.05zM8.02 14.6c-1.04 0-1.88-.95-1.88-2.12s.84-2.12 1.88-2.12 1.88.95 1.88 2.12-.84 2.12-1.88 2.12zm7.96 0c-1.04 0-1.88-.95-1.88-2.12s.84-2.12 1.88-2.12 1.88.95 1.88 2.12-.84 2.12-1.88 2.12z"/></svg>
+          </a>
+          <a href="mailto:Lixian1109@yahoo.com" aria-label="Send email">
+            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </a>
+        </nav>
       </div>
     </div>
   </footer>
 
   <script>
-    document.getElementById('year-tools').textContent = new Date().getFullYear();
-    document.getElementById('nav-toggle-2').addEventListener('click', () => {
-      document.querySelector('.nav').classList.toggle('open');
-    });
+    // NAV TOGGLE (same JS can be reused)
+    (function () {
+      const btn = document.querySelector('.nav-toggle');
+      const nav = document.getElementById('primary-nav');
+      btn.addEventListener('click', () => {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!expanded));
+        nav.classList.toggle('open');
+      });
+    })();
+
+    // FOOTER YEAR
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
