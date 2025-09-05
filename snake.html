@@ -9,24 +9,24 @@
 <body class="aquatic-bg">
   <!-- Vertical Navigation Bar -->
   <nav class="vertical-nav">
-    <a href="index.html" class="nav-btn">Home</a>
-    <a href="snake.html" class="nav-btn active">Snake</a>
-    <a href="about.html" class="nav-btn">About</a>
-    <a href="contact.html" class="nav-btn">Contact</a>
+    <button onclick="location.href='index.html'" class="nav-btn">Home</button>
+    <button onclick="location.href='snake.html'" class="nav-btn active">Snake</button>
+    <button onclick="location.href='about.html'" class="nav-btn">About</button>
+    <button onclick="location.href='contact.html'" class="nav-btn">Contact</button>
   </nav>
 
-  <!-- Snake Game Canvas -->
+  <!-- Snake Game Container -->
   <div class="game-container">
     <canvas id="game" width="400" height="400"></canvas>
   </div>
 
   <script>
-    var canvas = document.getElementById('game');
-    var context = canvas.getContext('2d');
-    var grid = 16;
-    var count = 0;
+    const canvas = document.getElementById('game');
+    const context = canvas.getContext('2d');
+    const grid = 16;
+    let count = 0;
 
-    var snake = {
+    const snake = {
       x: 160,
       y: 160,
       dx: grid,
@@ -34,7 +34,8 @@
       cells: [],
       maxCells: 4
     };
-    var apple = {
+
+    const apple = {
       x: 320,
       y: 320
     };
@@ -45,10 +46,12 @@
 
     function loop() {
       requestAnimationFrame(loop);
+
       if (++count < 4) return;
 
       count = 0;
       context.clearRect(0, 0, canvas.width, canvas.height);
+
       snake.x += snake.dx;
       snake.y += snake.dy;
 
@@ -60,11 +63,11 @@
       snake.cells.unshift({ x: snake.x, y: snake.y });
       if (snake.cells.length > snake.maxCells) snake.cells.pop();
 
-      context.fillStyle = 'red';
+      context.fillStyle = '#ff4d4d';
       context.fillRect(apple.x, apple.y, grid - 1, grid - 1);
 
       context.fillStyle = '#00e6e6';
-      snake.cells.forEach(function (cell, index) {
+      snake.cells.forEach(function(cell, index) {
         context.fillRect(cell.x, cell.y, grid - 1, grid - 1);
 
         if (cell.x === apple.x && cell.y === apple.y) {
@@ -73,7 +76,7 @@
           apple.y = getRandomInt(0, 25) * grid;
         }
 
-        for (var i = index + 1; i < snake.cells.length; i++) {
+        for (let i = index + 1; i < snake.cells.length; i++) {
           if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) {
             snake.x = 160;
             snake.y = 160;
@@ -88,7 +91,7 @@
       });
     }
 
-    document.addEventListener('keydown', function (e) {
+    document.addEventListener('keydown', function(e) {
       if (e.which === 37 && snake.dx === 0) {
         snake.dx = -grid; snake.dy = 0;
       } else if (e.which === 38 && snake.dy === 0) {
