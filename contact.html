@@ -3,35 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeLix - Contact</title>
+    <title>CodeLix | Contact</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body {
+            background: linear-gradient(135deg,#001f3f,#004d73,#0077b6);
+            color: #fff;
+            display: flex; justify-content: center; align-items: center;
+            flex-direction: column; height: 100vh;
+        }
+        .contact-container {
+            background: rgba(255,255,255,0.08); backdrop-filter: blur(15px);
+            padding: 30px; border-radius: 15px;
+            text-align: center; width: 400px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+        }
+        h1 { color: #6ee7ff; margin-bottom: 15px; }
+        p { color: #ccefff; font-size: 1rem; margin-bottom: 10px; }
+        a {
+            display: block; margin-top: 5px; font-weight: bold;
+            color: #00d8ff; text-decoration: none;
+        }
+        a:hover { color: #38bdf8; }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>CodeLix</h1>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="tools.html">Tools & Bots</a>
-            <a href="tutorials.html">Tutorials & Docs</a>
-            <a href="snake.html">Snake Game</a>
-            <a href="contact.html" class="active">Contact</a>
-        </nav>
-    </header>
-
-    <main>
-        <section class="content">
-            <h2>Contact Me</h2>
-            <p>If you'd like to reach me, here’s where you can find me:</p>
-            <ul>
-                <li>Email: <a href="mailto:lixian1109@yahoo.com">lixian1109@yahoo.com</a></li>
-                <li>GitHub: <a href="https://github.com/LixianPlayz" target="_blank">LixianPlayz</a></li>
-                <li>Discord: <strong>evaxity</strong></li>
-            </ul>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2025 CodeLix. All rights reserved.</p>
-    </footer>
+    <div class="contact-container">
+        <h1>Contact Me</h1>
+        <p>Email: <a href="mailto:lixian1109@yahoo.com">lixian1109@yahoo.com</a></p>
+        <p>GitHub: <a href="https://github.com/LixianPlayz" target="_blank">LixianPlayz</a></p>
+        <p>Discord: <span style="color:#38bdf8; font-weight:bold;">evaxity</span></p>
+    </div>
 </body>
 </html>
