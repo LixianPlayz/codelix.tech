@@ -3,121 +3,110 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CodeLix — Python tools & tutorials</title>
-  <meta name="description" content="CodeLix — concise Python tutorials, curated tools, and practical tips for beginners and hobbyist developers." />
+  <title>CodeLix • Home</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
+
+  <!-- Unified stylesheet -->
   <link rel="stylesheet" href="style.css">
+
+  <meta name="description" content="CodeLix — aquatic themed programming site focused on Python, tools, and tutorials.">
 </head>
 <body>
-  <!-- Site header / navigation -->
-  <header class="site-header" role="banner">
-    <div class="nav-inner">
-      <a class="brand" href="index.html" aria-label="CodeLix home">
-        <!-- simple logo -->
-        <svg class="logo" width="36" height="36" viewBox="0 0 24 24" aria-hidden="true">
-          <rect x="2" y="2" width="20" height="20" rx="4" fill="currentColor" opacity="0.12"/>
-          <path d="M7 8 L11 12 L7 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M13 8 L17 12 L13 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <svg class="logo" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="g" x1="0" x2="1"><stop stop-color="#00c2ff" offset="0"/><stop stop-color="#006dff" offset="1"/></linearGradient></defs><circle cx="24" cy="24" r="22" fill="url(#g)"/><path d="M14 34c6-8 20-8 24 0-6-9-18-9-24 0z" fill="#fff" opacity="0.12"/></svg>
         <span class="brand-text">CodeLix</span>
       </a>
 
-      <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation">
-        <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-        </svg>
-      </button>
-
-      <nav id="primary-nav" class="primary-nav" role="navigation" aria-label="Main navigation">
-        <ul>
-          <li><a href="index.html" class="active">Home</a></li>
-          <li><a href="tools.html">Tools</a></li>
-          <li><a href="tutorials.html">Tutorials</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
+      <nav class="nav" id="main-nav">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="tools.html" class="nav-link">Tools</a>
+        <a href="tutorials.html" class="nav-link">Tutorials</a>
+        <a href="contact.html" class="nav-link">Contact</a>
       </nav>
+
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
 
-  <main class="site-main" id="main" role="main">
-    <!-- Hero -->
+  <main class="container main-content">
     <section class="hero">
-      <div class="hero-content">
-        <h1>Learn Python the practical way</h1>
-        <p class="lead">Concise tutorials, curated tools, and quick tips to help you build real projects with Python — from first script to small apps.</p>
+      <div class="hero-left">
+        <h1>Welcome to CodeLix</h1>
+        <p class="lead">An aquatic-inspired hub for learning programming — with a focus on Python. Minimal, clean, and built to help beginners feel at home while they explore code.</p>
 
-        <div class="hero-ctas">
-          <a class="btn btn-primary" href="tutorials.html">Explore Tutorials</a>
-          <a class="btn btn-ghost" href="tools.html">Browse Tools</a>
+        <div class="cta-row">
+          <a class="btn primary" href="tutorials.html">Start Learning</a>
+          <a class="btn ghost" href="tools.html">Explore Tools</a>
         </div>
       </div>
 
-      <aside class="hero-panel" aria-labelledby="quick-tip-heading">
-        <h3 id="quick-tip-heading">Quick Tip</h3>
-        <p><strong>Prefer virtual environments.</strong> Use <code>python -m venv .venv</code> or <code>poetry</code> to avoid dependency conflicts.</p>
-      </aside>
+      <div class="hero-right">
+        <div class="card hero-card">
+          <h3>Why Python?</h3>
+          <p>Python is beginner-friendly, powerful, and widely used in web dev, data science, automation, and more. Start with small projects and grow from there.</p>
+          <ul class="features">
+            <li>Readable syntax</li>
+            <li>Huge community & libraries</li>
+            <li>Great for prototyping</li>
+          </ul>
+        </div>
+      </div>
     </section>
 
-    <!-- Features / intro -->
-    <section class="intro-grid" aria-labelledby="why-heading">
-      <h2 id="why-heading" class="sr-only">Why CodeLix</h2>
-      <article class="card feature">
-        <h3>Practical</h3>
-        <p>Hands-on examples you can run now. Copy, paste, and experiment — learn by doing.</p>
-      </article>
-      <article class="card feature">
-        <h3>Curated Tools</h3>
-        <p>A compact selection of editors, linters, and packages you will actually use.</p>
-      </article>
-      <article class="card feature">
-        <h3>Accessible</h3>
-        <p>Readable fonts, good contrast, and clean layouts — programming resources that are friendly to everyone.</p>
-      </article>
+    <section class="spotlight">
+      <h2>Featured</h2>
+      <div class="grid-3">
+        <article class="card">
+          <h4>Quick Start Guides</h4>
+          <p>Step-by-step mini-guides to get your dev environment set up and your first script running.</p>
+        </article>
+
+        <article class="card">
+          <h4>Tools & Tips</h4>
+          <p>Curated list of editors, linters, and helpers for making coding smoother.</p>
+        </article>
+
+        <article class="card">
+          <h4>Community</h4>
+          <p>Links to GitHub projects, Discord groups, and how to share your work.</p>
+        </article>
+      </div>
     </section>
   </main>
 
-  <!-- Sticky footer (content placed in footer.html content) -->
-  <footer class="site-footer" role="contentinfo">
-    <div class="footer-inner">
-      <div class="footer-left">
-        <small>&copy; <span id="year"></span> CodeLix — Built by Lix</small>
-      </div>
-      <div class="footer-right">
-        <nav class="socials" aria-label="Social links">
-          <a href="https://github.com/LixianPlayz" target="_blank" rel="noopener" aria-label="GitHub: LixianPlayz" title="GitHub">
-            <!-- GitHub icon -->
-            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.73.5.87 5.36.87 11.63c0 4.77 3.09 8.81 7.38 10.24.54.1.74-.24.74-.53 0-.26-.01-1-.02-1.96-3 .65-3.64-1.42-3.64-1.42-.49-1.25-1.2-1.59-1.2-1.59-.98-.67.07-.66.07-.66 1.08.08 1.65 1.11 1.65 1.11.96 1.64 2.51 1.17 3.12.9.1-.7.38-1.17.69-1.44-2.4-.27-4.93-1.2-4.93-5.33 0-1.18.42-2.15 1.11-2.91-.11-.27-.48-1.36.11-2.84 0 0 .9-.29 2.95 1.11.86-.24 1.78-.36 2.69-.36.91 0 1.83.12 2.69.36 2.04-1.4 2.95-1.11 2.95-1.11.59 1.48.22 2.57.11 2.84.69.76 1.11 1.73 1.11 2.91 0 4.14-2.54 5.06-4.96 5.33.39.33.73.97.73 1.95 0 1.41-.01 2.55-.01 2.9 0 .29.2.64.75.53 4.29-1.43 7.38-5.47 7.38-10.24C23.13 5.36 18.27.5 12 .5z"/></svg>
-          </a>
-
-          <a href="https://discord.gg/UVypxeTx" target="_blank" rel="noopener" aria-label="Discord server" title="Discord">
-            <!-- Discord icon -->
-            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.317 4.3698A19.7913 19.7913 0 0016.579 3.1a13.0772 13.0772 0 00-.688 1.444c-2.96-.445-5.92-.445-8.877 0A13.77 13.77 0 006.326 3.1 19.736 19.736 0 001.684 4.369c-3.13 4.583-3.09 9.03-.89 13.05 4.03 3.01 8.04 2.46 11.74 1.79.89-.18 1.67-.3 2.42-.3s1.53.12 2.42.3c3.71.67 7.71 1.22 11.74-1.79 2.2-4.02 2.24-8.47-.89-13.05zM8.02 14.6c-1.04 0-1.88-.95-1.88-2.12s.84-2.12 1.88-2.12 1.88.95 1.88 2.12-.84 2.12-1.88 2.12zm7.96 0c-1.04 0-1.88-.95-1.88-2.12s.84-2.12 1.88-2.12 1.88.95 1.88 2.12-.84 2.12-1.88 2.12z"/></svg>
-          </a>
-
-          <a href="mailto:Lixian1109@yahoo.com" aria-label="Send email" title="Email">
-            <!-- Email icon -->
-            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-          </a>
-        </nav>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="copyright">© <span id="year"></span> CodeLix • Built with an ocean of curiosity.</div>
+      <div class="socials">
+        <a href="https://github.com/" class="social" target="_blank" rel="noopener" aria-label="GitHub">
+          <!-- GitHub SVG -->
+          <svg viewBox="0 0 24 24" class="icon"><path d="M12 .5C5.7.5.9 5.3.9 11.6c0 4.6 3 8.5 7.2 9.9.5.1.7-.2.7-.5v-1.8c-2.9.6-3.6-1.3-3.6-1.3-.5-1.3-1.1-1.6-1.1-1.6-.9-.6.1-.6.1-.6 1 .1 1.6 1 1.6 1 .9 1.6 2.4 1.1 3 .8.1-.7.3-1.1.6-1.4-2.3-.3-4.6-1.2-4.6-5.4 0-1.2.4-2.1 1.1-2.8-.1-.3-.5-1.4.1-2.9 0 0 .9-.3 3 1.1.9-.3 1.9-.4 2.9-.4 1 0 2 .1 2.9.4 2.1-1.4 3-1.1 3-1.1.6 1.5.2 2.6.1 2.9.7.7 1.1 1.6 1.1 2.8 0 4.2-2.3 5.1-4.6 5.4.3.2.6.8.6 1.7v2.5c0 .3.2.6.7.5 4.2-1.4 7.2-5.3 7.2-9.9C23.1 5.3 18.3.5 12 .5z"/></svg>
+        </a>
+        <a href="#" class="social" target="_blank" rel="noopener" aria-label="Discord">
+          <!-- Discord SVG -->
+          <svg viewBox="0 0 24 24" class="icon"><path d="M20 6.6c-0.6-0.3-1.4-0.6-2.1-0.8-0.1 0-0.3 0.1-0.3 0.2-0.3 0.9-0.8 2-1.4 2.9-1.8-0.3-3.6-0.3-5.4 0C9.5 8.9 9 7.9 8.7 7c0-0.1-0.1-0.2-0.3-0.2-0.7 0.2-1.5 0.5-2.1 0.8C4 9.2 3 12.3 3.6 15.2c0 0 1 0.8 2.2 1.2 0.2-0.2 0.4-0.4 0.6-0.6-0.4-0.2-0.8-0.6-1-1.1 0.2 0 0.5 0 0.7 0.1 0.4 0.1 0.8 0.2 1.2 0.3 1.8 0.4 3.6 0.6 5.4 0.6s3.6-0.2 5.4-0.6c0.4-0.1 0.8-0.2 1.2-0.3 0.2-0.1 0.5-0.1 0.7-0.1-0.2 0.5-0.6 0.9-1 1.1 0.2 0.2 0.4 0.4 0.6 0.6 1.2-0.4 2.2-1.2 2.2-1.2 0.6-2.9-0.4-6-3.4-8.6zM9.5 13.3c-0.7 0-1.3-0.6-1.3-1.3S8.8 10.7 9.5 10.7 10.8 11.3 10.8 12 10.2 13.3 9.5 13.3zM14.5 13.3c-0.7 0-1.3-0.6-1.3-1.3s0.6-1.3 1.3-1.3 1.3 0.6 1.3 1.3-0.6 1.3-1.3 1.3z"/></svg>
+        </a>
+        <a href="#" class="social" target="_blank" rel="noopener" aria-label="Twitter">
+          <!-- Twitter SVG -->
+          <svg viewBox="0 0 24 24" class="icon"><path d="M23 3.1c-0.8 0.4-1.6 0.6-2.4 0.8 0.9-0.5 1.6-1.4 1.9-2.5-0.9 0.6-1.9 1-2.9 1.2-0.9-1-2.3-1.6-3.8-1.6-2.9 0-5.3 2.3-5.3 5.3 0 0.4 0 0.9 0.1 1.3-4.4-0.2-8.3-2.3-10.9-5.3-0.4 0.6-0.6 1.4-0.6 2.1 0 1.8 0.9 3.5 2.2 4.5-0.8 0-1.6-0.2-2.3-0.6 0 0 0 0 0 0.1 0 2.1 1.5 3.9 3.6 4.3-0.4 0.1-0.9 0.2-1.4 0.2-0.3 0-0.6 0-0.9-0.1 0.6 2 2.4 3.4 4.6 3.5-1.7 1.3-3.8 2.1-6.1 2.1-0.4 0-0.8 0-1.2-0.1 2.2 1.4 4.8 2.2 7.6 2.2 9.1 0 14.1-7.5 14.1-14.1v-0.6c1-0.7 1.8-1.6 2.4-2.6z"/></svg>
+        </a>
       </div>
     </div>
   </footer>
 
-  <!-- Minimal JS: nav toggle, footer year, accessibility helpers -->
   <script>
-    // NAV TOGGLE
-    (function () {
-      const btn = document.querySelector('.nav-toggle');
-      const nav = document.getElementById('primary-nav');
-
-      btn.addEventListener('click', () => {
-        const expanded = btn.getAttribute('aria-expanded') === 'true';
-        btn.setAttribute('aria-expanded', String(!expanded));
-        nav.classList.toggle('open');
-      });
-    })();
-
-    // FOOTER YEAR
+    // dynamic year and nav toggle
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    const toggle = document.getElementById('nav-toggle');
+    const nav = document.getElementById('main-nav');
+    toggle.addEventListener('click', () => nav.classList.toggle('open'));
   </script>
 </body>
 </html>
