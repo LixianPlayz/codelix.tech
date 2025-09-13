@@ -52,31 +52,31 @@
         </div>
       </div>
 
-      <!-- Contact form -->
+      <!-- Contact form (Netlify-enabled) -->
       <div class="contact-form card">
         <h2>Send a Message</h2>
-        <form id="contactForm" action="#" method="post" novalidate>
+        <form name="contact" method="POST" data-netlify="true">
+          <input type="hidden" name="form-name" value="contact">
+
           <label>
             <span>Name</span>
-            <input type="text" name="name" id="name" placeholder="Your name" required>
+            <input type="text" name="name" placeholder="Your name" required>
           </label>
 
           <label>
             <span>Email</span>
-            <input type="email" name="email" id="email" placeholder="you@example.com" required>
+            <input type="email" name="email" placeholder="you@example.com" required>
           </label>
 
           <label>
             <span>Message</span>
-            <textarea name="message" id="message" rows="6" placeholder="Tell me about your project or question..." required></textarea>
+            <textarea name="message" rows="6" placeholder="Tell me about your project or question..." required></textarea>
           </label>
 
           <div class="form-actions">
             <button class="btn primary" type="submit">Send Message</button>
             <button class="btn ghost" type="reset">Reset</button>
           </div>
-
-          <div id="formStatus" class="form-status" aria-live="polite"></div>
         </form>
       </div>
     </section>
@@ -95,30 +95,6 @@
 
   <script>
     document.getElementById('year-contact').textContent = new Date().getFullYear();
-
-    // Simple client-side validation and status message (no backend)
-    const form = document.getElementById('contactForm');
-    const status = document.getElementById('formStatus');
-
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      // Minimal validation
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const message = document.getElementById('message').value.trim();
-
-      if (!name || !email || !message) {
-        status.textContent = "Please fill out all fields.";
-        status.className = "form-status error";
-        return;
-      }
-
-      // Simulate a send
-      status.textContent = "Thanks — message received (local demo).";
-      status.className = "form-status success";
-      form.reset();
-    });
-
     document.getElementById('nav-toggle-4').addEventListener('click', () => {
       document.querySelector('.nav').classList.toggle('open');
     });
