@@ -3,109 +3,214 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CodeLix • Tools</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <title>Biography • Journey</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="index.html">
-        <svg class="logo" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="g2" x1="0" x2="1"><stop stop-color="#00c2ff" offset="0"/><stop stop-color="#006dff" offset="1"/></linearGradient></defs><circle cx="24" cy="24" r="22" fill="url(#g2)"/></svg>
-        <span class="brand-text">CodeLix</span>
+<body class="page journey-page">
+  <nav class="nav">
+    <div class="nav-left">
+      <a class="brand" href="index.html" aria-label="Home">
+        <svg viewBox="0 0 48 48" class="logo"><circle cx="24" cy="24" r="22" /></svg>
+        <span class="brand-text">Lix Bio</span>
       </a>
-
-      <nav class="nav">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="tools.html" class="nav-link active">Tools</a>
-        <a href="tutorials.html" class="nav-link">Tutorials</a>
-        <a href="contact.html" class="nav-link">Contact</a>
-      </nav>
-
-      <button class="nav-toggle" id="nav-toggle-2" aria-label="Toggle navigation">
-        <span></span><span></span><span></span>
-      </button>
     </div>
-  </header>
+    <div class="nav-right">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="about.html">About</a>
+      <a class="nav-link active" href="journey.html">Journey</a>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+  </nav>
 
-  <main class="container main-content">
-    <section>
-      <h1>Programming Tools (Python)</h1>
-      <p class="lead">A curated list of useful tools and environments for Python development — from beginner to advanced.</p>
+  <main class="container journey">
+    <header class="page-head">
+      <h2>Journey — A linear, interactive story</h2>
+      <p class="lead">Click "Next" to reveal each step. This journey follows choices and answers exactly as provided.</p>
+    </header>
 
-      <div class="tool-list">
-        <article class="tool card">
-          <h3>Visual Studio Code</h3>
-          <p>Lightweight editor with excellent Python extensions (Pylance, Python extension). Great debugging and integrated terminal.</p>
-          <div class="tool-meta">
-            <span class="pill">Editor</span>
-            <span class="pill">Extensions</span>
-          </div>
-        </article>
+    <section class="story-card" id="story">
+      <div class="step" id="step-template" aria-hidden="true">
+        <h3 class="step-title"></h3>
+        <p class="step-body"></p>
+        <div class="step-meta"></div>
+      </div>
 
-        <article class="tool card">
-          <h3>PyCharm</h3>
-          <p>Full-featured IDE for Python with smart refactoring, testing integration, and project management. Good for larger projects.</p>
-          <div class="tool-meta">
-            <span class="pill">IDE</span>
-            <span class="pill">Refactor</span>
-          </div>
-        </article>
+      <div id="step-container" class="step-container" aria-live="polite">
+        <!-- Steps will be injected here -->
+      </div>
 
-        <article class="tool card">
-          <h3>Jupyter / JupyterLab</h3>
-          <p>Interactive notebooks ideal for data exploration, visualization, and step-by-step learning.</p>
-          <div class="tool-meta">
-            <span class="pill">Notebooks</span>
-            <span class="pill">Data Science</span>
-          </div>
-        </article>
-
-        <article class="tool card">
-          <h3>pip & virtualenv / venv</h3>
-          <p>Package management and isolated environments — keep dependencies separated per-project.</p>
-          <div class="tool-meta">
-            <span class="pill">Package</span>
-            <span class="pill">Environment</span>
-          </div>
-        </article>
-
-        <article class="tool card">
-          <h3>Black & Flake8</h3>
-          <p>Formatting and linting tools to keep code consistent and clean.</p>
-          <div class="tool-meta">
-            <span class="pill">Formatter</span>
-            <span class="pill">Linter</span>
-          </div>
-        </article>
-
-        <article class="tool card">
-          <h3>Git & GitHub</h3>
-          <p>Version control and collaboration. Use branches, commits, and PRs to manage code changes safely.</p>
-          <div class="tool-meta">
-            <span class="pill">VCS</span>
-            <span class="pill">Collaboration</span>
-          </div>
-        </article>
+      <div class="controls">
+        <button id="prevBtn" class="btn" disabled>Prev</button>
+        <button id="nextBtn" class="btn btn-primary glow">Next</button>
       </div>
     </section>
+
+    <aside class="sidebar">
+      <div class="panel">
+        <h4>Quick Stats</h4>
+        <ul>
+          <li><strong>Start:</strong> Soddy Daisy, TN</li>
+          <li><strong>Superpower:</strong> Teleportation</li>
+          <li><strong>Ultimate Goal:</strong> Lead people to Jesus</li>
+          <li><strong>Companion:</strong> Normal guinea pig</li>
+        </ul>
+      </div>
+
+      <div class="panel small">
+        <h4>Soundtrack</h4>
+        <p>Gospel music — steady, grounding.</p>
+      </div>
+    </aside>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div>© <span id="year-tools"></span> CodeLix</div>
-      <div class="socials">
-        <a class="social" href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub">
-          <svg viewBox="0 0 24 24" class="icon"><path d="M12 .5C5.7.5.9 5.3.9 11.6c0 4.6 3 8.5 7.2 9.9.5.1.7-.2.7-.5v-1.8c-2.9.6-3.6-1.3-3.6-1.3-.5-1.3-1.1-1.6-1.1-1.6-.9-.6.1-.6.1-.6 1 .1 1.6 1 1.6 1 .9 1.6 2.4 1.1 3 .8.1-.7.3-1.1.6-1.4-2.3-.3-4.6-1.2-4.6-5.4 0-1.2.4-2.1 1.1-2.8-.1-.3-.5-1.4.1-2.9 0 0 .9-.3 3 1.1.9-.3 1.9-.4 2.9-.4 1 0 2 .1 2.9.4 2.1-1.4 3-1.1 3-1.1.6 1.5.2 2.6.1 2.9.7.7 1.1 1.6 1.1 2.8 0 4.2-2.3 5.1-4.6 5.4.3.2.6.8.6 1.7v2.5c0 .3.2.6.7.5 4.2-1.4 7.2-5.3 7.2-9.9C23.1 5.3 18.3.5 12 .5z"/></svg>
-        </a>
-      </div>
-    </div>
+  <footer class="footer">
+    <small><a href="index.html">Home</a> • <a href="about.html">About</a> • © <span id="year3"></span></small>
   </footer>
 
   <script>
-    document.getElementById('year-tools').textContent = new Date().getFullYear();
-    document.getElementById('nav-toggle-2').addEventListener('click', () => {
-      document.querySelector('.nav').classList.toggle('open');
+    document.getElementById('year3').textContent = new Date().getFullYear();
+
+    // The exact ordered steps provided by the user:
+    const steps = [
+      { title: "Beginning", body: "Journey begins in Soddy Daisy, TN.", meta: "Location" },
+      { title: "First big decision", body: "Getting saved.", meta: "Decision" },
+      { title: "Motivation", body: "Curiosity.", meta: "Why" },
+      { title: "Favorite childhood activity", body: "Video games.", meta: "Memory" },
+      { title: "First sidekick", body: "My Mom.", meta: "Ally" },
+      { title: "First big challenge", body: "Making new friends.", meta: "Challenge" },
+      { title: "Special skill", body: "Visualizing custom designs or structures.", meta: "Skill" },
+      { title: "Mysterious item", body: "N/A", meta: "Item" },
+      { title: "Dream superpower", body: "Teleportation.", meta: "Superpower" },
+      { title: "Music powering the journey", body: "Gospel music.", meta: "Soundtrack" },
+      { title: "Befriended animal", body: "Normal guinea pig.", meta: "Friend" },
+      { title: "Adventure location", body: "N/A", meta: "Location" },
+      { title: "Favorite subject", body: "Science.", meta: "Study" },
+      { title: "First rival", body: "Classmate.", meta: "Rival" },
+      { title: "How setbacks are handled", body: "Ask for help.", meta: "Response" },
+      { title: "Collectible", body: "Money.", meta: "Collectible" },
+      { title: "Vehicle", body: "Car.", meta: "Transport" },
+      { title: "Ultimate goal", body: "Lead people to Jesus.", meta: "Purpose" },
+      { title: "Snack", body: "Candy.", meta: "Snack" },
+      { title: "Mentor", body: "Youth Pastor.", meta: "Guide" },
+      { title: "Obstacle", body: "Exams.", meta: "Obstacle" },
+      { title: "Inspiration", body: "Family.", meta: "Inspiration" },
+      { title: "Victory celebration", body: "Quiet reflection.", meta: "Victory" },
+      { title: "Final boss", body: "Time.", meta: "Enemy" },
+      { title: "Ending", body: "Peaceful life.", meta: "Ending" }
+    ];
+
+    const container = document.getElementById('step-container');
+    let index = -1;
+    const createdSteps = [];
+
+    function createStepElement(stepData, idx) {
+      const el = document.createElement('article');
+      el.className = 'step reveal';
+      el.dataset.index = idx;
+
+      const title = document.createElement('h3');
+      title.className = 'step-title';
+      title.textContent = stepData.title;
+
+      const body = document.createElement('p');
+      body.className = 'step-body';
+      body.textContent = stepData.body;
+
+      const meta = document.createElement('div');
+      meta.className = 'step-meta';
+      meta.innerHTML = `<span class="badge">${stepData.meta}</span>`;
+
+      // subtle decorative icon
+      const icon = document.createElementNS('http://www.w3.org/2000/svg','svg');
+      icon.setAttribute('viewBox','0 0 24 24');
+      icon.classList.add('tiny-icon');
+      icon.innerHTML = '<path d="M12 2 L15 9 L22 10 L17 14 L18 21 L12 18 L6 21 L7 14 L2 10 L9 9 Z"/>';
+
+      el.appendChild(icon);
+      el.appendChild(title);
+      el.appendChild(body);
+      el.appendChild(meta);
+
+      // small interactive hint: pulse the badge briefly when revealed
+      el.addEventListener('animationend', () => {
+        const b = el.querySelector('.badge');
+        if (b) b.classList.add('pulse');
+      }, { once: true });
+
+      return el;
+    }
+
+    function showNext() {
+      if (index < steps.length - 1) {
+        index++;
+        const stepEl = createStepElement(steps[index], index);
+        container.appendChild(stepEl);
+        // scroll into view smoothly
+        stepEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        createdSteps.push(stepEl);
+        updateButtons();
+      }
+    }
+
+    function showPrev() {
+      if (index > 0) {
+        // remove last step with exit animation
+        const last = createdSteps.pop();
+        last.classList.add('fade-out');
+        last.addEventListener('animationend', () => last.remove(), { once: true });
+        index--;
+        updateButtons();
+      }
+    }
+
+    function updateButtons() {
+      document.getElementById('prevBtn').disabled = index <= -1;
+      const nextBtn = document.getElementById('nextBtn');
+      if (index >= steps.length - 1) {
+        nextBtn.textContent = 'Finish';
+        nextBtn.classList.remove('glow');
+      } else {
+        nextBtn.textContent = 'Next';
+        nextBtn.classList.add('glow');
+      }
+    }
+
+    // Add small interactive "choice" micro-interaction on some steps
+    container.addEventListener('click', (e) => {
+      const step = e.target.closest('.step');
+      if (!step) return;
+      // toggle a tiny reaction on click
+      step.classList.toggle('clicked');
+    });
+
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      if (index === steps.length - 1) {
+        // final micro-celebration
+        const end = document.createElement('div');
+        end.className = 'ending reveal big';
+        end.innerHTML = '<h3>Ending: Peaceful life</h3><p>Journey complete — a life oriented by faith, family, and quiet reflection.</p>';
+        container.appendChild(end);
+        end.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        document.getElementById('nextBtn').disabled = true;
+        document.getElementById('prevBtn').disabled = false;
+      } else {
+        showNext();
+      }
+    });
+    document.getElementById('prevBtn').addEventListener('click', showPrev);
+
+    // Start with the first step queued (but not automatically revealed) — user clicks Next
+    updateButtons();
+
+    // small keyboard support
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') document.getElementById('nextBtn').click();
+      if (e.key === 'ArrowLeft') document.getElementById('prevBtn').click();
+    });
+
+    // Nav toggle for small screens
+    document.querySelector('.nav-toggle').addEventListener('click', () => {
+      document.body.classList.toggle('nav-open');
     });
   </script>
 </body>
