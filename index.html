@@ -3,110 +3,90 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CodeLix • Home</title>
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
-
-  <!-- Unified stylesheet -->
-  <link rel="stylesheet" href="style.css">
-
-  <meta name="description" content="CodeLix — aquatic themed programming site focused on Python, tools, and tutorials.">
+  <title>Biography • Home</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="index.html">
-        <svg class="logo" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="g" x1="0" x2="1"><stop stop-color="#00c2ff" offset="0"/><stop stop-color="#006dff" offset="1"/></linearGradient></defs><circle cx="24" cy="24" r="22" fill="url(#g)"/><path d="M14 34c6-8 20-8 24 0-6-9-18-9-24 0z" fill="#fff" opacity="0.12"/></svg>
-        <span class="brand-text">CodeLix</span>
+<body class="page">
+  <nav class="nav">
+    <div class="nav-left">
+      <a class="brand" href="index.html" aria-label="Home">
+        <svg viewBox="0 0 48 48" class="logo"><circle cx="24" cy="24" r="22" /></svg>
+        <span class="brand-text">Lix Bio</span>
       </a>
-
-      <nav class="nav" id="main-nav">
-        <a href="index.html" class="nav-link active">Home</a>
-        <a href="tools.html" class="nav-link">Tools</a>
-        <a href="tutorials.html" class="nav-link">Tutorials</a>
-        <a href="contact.html" class="nav-link">Contact</a>
-      </nav>
-
-      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
-        <span></span><span></span><span></span>
-      </button>
     </div>
-  </header>
+    <div class="nav-right">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="about.html">About</a>
+      <a class="nav-link" href="journey.html">Journey</a>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+  </nav>
 
-  <main class="container main-content">
-    <section class="hero">
-      <div class="hero-left">
-        <h1>Welcome to CodeLix</h1>
-        <p class="lead">An aquatic-inspired hub for learning programming — with a focus on Python. Minimal, clean, and built to help beginners feel at home while they explore code.</p>
+  <main class="container hero">
+    <div class="hero-card">
+      <h1 class="hero-title">
+        <span class="typewriter" data-text='["Hello — I am Lix.","Welcome to my biography.","Explore my story."]'></span>
+      </h1>
 
-        <div class="cta-row">
-          <a class="btn primary" href="tutorials.html">Start Learning</a>
-          <a class="btn ghost" href="tools.html">Explore Tools</a>
+      <p class="hero-sub">A living, breathing micro-site — sleek, blue, and interactive.</p>
+
+      <div class="hero-cta">
+        <a class="btn btn-primary glow" href="about.html" role="button">About</a>
+        <a class="btn btn-outline glow" href="journey.html" role="button">Journey</a>
+      </div>
+
+      <div class="mini-info">
+        <div class="spark">
+          <svg class="spark-icon" viewBox="0 0 24 24"><path d="M12 2 L15 9 L22 10 L17 14 L18 21 L12 18 L6 21 L7 14 L2 10 L9 9 Z"/></svg>
+          <span>Interactive animations • responsive • accessible</span>
         </div>
       </div>
+    </div>
 
-      <div class="hero-right">
-        <div class="card hero-card">
-          <h3>Why Python?</h3>
-          <p>Python is beginner-friendly, powerful, and widely used in web dev, data science, automation, and more. Start with small projects and grow from there.</p>
-          <ul class="features">
-            <li>Readable syntax</li>
-            <li>Huge community & libraries</li>
-            <li>Great for prototyping</li>
-          </ul>
-        </div>
+    <div class="floating-cards">
+      <div class="card small float" aria-hidden="true">
+        <strong>Faith</strong><span>Guiding light</span>
       </div>
-    </section>
-
-    <section class="spotlight">
-      <h2>Featured</h2>
-      <div class="grid-3">
-        <article class="card">
-          <h4>Quick Start Guides</h4>
-          <p>Step-by-step mini-guides to get your dev environment set up and your first script running.</p>
-        </article>
-
-        <article class="card">
-          <h4>Tools & Tips</h4>
-          <p>Curated list of editors, linters, and helpers for making coding smoother.</p>
-        </article>
-
-        <article class="card">
-          <h4>Community</h4>
-          <p>Links to GitHub projects, Discord groups, and how to share your work.</p>
-        </article>
+      <div class="card small float delay" aria-hidden="true">
+        <strong>Design</strong><span>Visualizing ideas</span>
       </div>
-    </section>
+      <div class="card small float delay-long" aria-hidden="true">
+        <strong>Adventure</strong><span>Ongoing</span>
+      </div>
+    </div>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="copyright">© <span id="year"></span> CodeLix • Built with an ocean of curiosity.</div>
-      <div class="socials">
-        <a href="https://github.com/" class="social" target="_blank" rel="noopener" aria-label="GitHub">
-          <!-- GitHub SVG -->
-          <svg viewBox="0 0 24 24" class="icon"><path d="M12 .5C5.7.5.9 5.3.9 11.6c0 4.6 3 8.5 7.2 9.9.5.1.7-.2.7-.5v-1.8c-2.9.6-3.6-1.3-3.6-1.3-.5-1.3-1.1-1.6-1.1-1.6-.9-.6.1-.6.1-.6 1 .1 1.6 1 1.6 1 .9 1.6 2.4 1.1 3 .8.1-.7.3-1.1.6-1.4-2.3-.3-4.6-1.2-4.6-5.4 0-1.2.4-2.1 1.1-2.8-.1-.3-.5-1.4.1-2.9 0 0 .9-.3 3 1.1.9-.3 1.9-.4 2.9-.4 1 0 2 .1 2.9.4 2.1-1.4 3-1.1 3-1.1.6 1.5.2 2.6.1 2.9.7.7 1.1 1.6 1.1 2.8 0 4.2-2.3 5.1-4.6 5.4.3.2.6.8.6 1.7v2.5c0 .3.2.6.7.5 4.2-1.4 7.2-5.3 7.2-9.9C23.1 5.3 18.3.5 12 .5z"/></svg>
-        </a>
-        <a href="#" class="social" target="_blank" rel="noopener" aria-label="Discord">
-          <!-- Discord SVG -->
-          <svg viewBox="0 0 24 24" class="icon"><path d="M20 6.6c-0.6-0.3-1.4-0.6-2.1-0.8-0.1 0-0.3 0.1-0.3 0.2-0.3 0.9-0.8 2-1.4 2.9-1.8-0.3-3.6-0.3-5.4 0C9.5 8.9 9 7.9 8.7 7c0-0.1-0.1-0.2-0.3-0.2-0.7 0.2-1.5 0.5-2.1 0.8C4 9.2 3 12.3 3.6 15.2c0 0 1 0.8 2.2 1.2 0.2-0.2 0.4-0.4 0.6-0.6-0.4-0.2-0.8-0.6-1-1.1 0.2 0 0.5 0 0.7 0.1 0.4 0.1 0.8 0.2 1.2 0.3 1.8 0.4 3.6 0.6 5.4 0.6s3.6-0.2 5.4-0.6c0.4-0.1 0.8-0.2 1.2-0.3 0.2-0.1 0.5-0.1 0.7-0.1-0.2 0.5-0.6 0.9-1 1.1 0.2 0.2 0.4 0.4 0.6 0.6 1.2-0.4 2.2-1.2 2.2-1.2 0.6-2.9-0.4-6-3.4-8.6zM9.5 13.3c-0.7 0-1.3-0.6-1.3-1.3S8.8 10.7 9.5 10.7 10.8 11.3 10.8 12 10.2 13.3 9.5 13.3zM14.5 13.3c-0.7 0-1.3-0.6-1.3-1.3s0.6-1.3 1.3-1.3 1.3 0.6 1.3 1.3-0.6 1.3-1.3 1.3z"/></svg>
-        </a>
-        <a href="#" class="social" target="_blank" rel="noopener" aria-label="Twitter">
-          <!-- Twitter SVG -->
-          <svg viewBox="0 0 24 24" class="icon"><path d="M23 3.1c-0.8 0.4-1.6 0.6-2.4 0.8 0.9-0.5 1.6-1.4 1.9-2.5-0.9 0.6-1.9 1-2.9 1.2-0.9-1-2.3-1.6-3.8-1.6-2.9 0-5.3 2.3-5.3 5.3 0 0.4 0 0.9 0.1 1.3-4.4-0.2-8.3-2.3-10.9-5.3-0.4 0.6-0.6 1.4-0.6 2.1 0 1.8 0.9 3.5 2.2 4.5-0.8 0-1.6-0.2-2.3-0.6 0 0 0 0 0 0.1 0 2.1 1.5 3.9 3.6 4.3-0.4 0.1-0.9 0.2-1.4 0.2-0.3 0-0.6 0-0.9-0.1 0.6 2 2.4 3.4 4.6 3.5-1.7 1.3-3.8 2.1-6.1 2.1-0.4 0-0.8 0-1.2-0.1 2.2 1.4 4.8 2.2 7.6 2.2 9.1 0 14.1-7.5 14.1-14.1v-0.6c1-0.7 1.8-1.6 2.4-2.6z"/></svg>
-        </a>
-      </div>
-    </div>
+  <footer class="footer">
+    <small>© <span id="year"></span> Lix Bio — Built with intention</small>
   </footer>
 
   <script>
-    // dynamic year and nav toggle
+    // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    const toggle = document.getElementById('nav-toggle');
-    const nav = document.getElementById('main-nav');
-    toggle.addEventListener('click', () => nav.classList.toggle('open'));
+    // Typewriter: cycles through provided phrases
+    (function(){
+      const el = document.querySelector('.typewriter');
+      const texts = JSON.parse(el.getAttribute('data-text'));
+      let i = 0, char = 0, forward = true, wait = 1000;
+      function step(){
+        const txt = texts[i];
+        if (forward) {
+          el.textContent = txt.slice(0, ++char);
+          if (char === txt.length) { forward = false; setTimeout(step, wait); return; }
+        } else {
+          el.textContent = txt.slice(0, --char);
+          if (char === 0) { forward = true; i = (i+1) % texts.length; }
+        }
+        setTimeout(step, forward ? 60 : 30);
+      }
+      step();
+    })();
+
+    // Nav toggle for small screens
+    document.querySelector('.nav-toggle').addEventListener('click', () => {
+      document.body.classList.toggle('nav-open');
+    });
   </script>
 </body>
 </html>
