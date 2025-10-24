@@ -1,24 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Charlie (Lix) | Home</title>
-  <style>
-    body { font-family: Arial, sans-serif; background: #f4f4f9; color: #333; margin: 0; padding: 0; }
-    header, footer { background: #111; color: #fff; text-align: center; padding: 1em 0; }
-    nav a { color: #fff; margin: 0 15px; text-decoration: none; font-weight: bold; }
-    nav a:hover { text-decoration: underline; }
-    main { max-width: 800px; margin: 2em auto; padding: 1em; background: #fff; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-    section { margin-bottom: 2em; }
-    h1, h2 { color: #222; }
-    .discord-link { display: inline-block; background: #5865F2; color: #fff; padding: 10px 20px; border-radius: 5px; text-decoration: none; }
-    .discord-link:hover { background: #4752C4; }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Home</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <h1>Welcome to My Developer Site</h1>
     <nav>
       <a href="index.html">Home</a>
       <a href="tutorials.html">Tutorials</a>
@@ -27,25 +16,28 @@
   </header>
 
   <main>
-    <section>
-      <h2>About This Site</h2>
-      <p>Welcome! This site is a hub for learning and exploring programming. You’ll find tutorials for Python and LuaU, as well as useful tools and links to help you get started coding.</p>
+    <section aria-labelledby="welcome">
+      <h1 id="welcome">Welcome</h1>
+      <p class="lead">This is a small developer hub with learning resources focused on Python and LuaU. Expect concise tutorials, copyable code snippets, and useful local resources to help you build and learn.</p>
     </section>
 
-    <section>
-      <h2>Join My Discord</h2>
-      <a class="discord-link" href="https://discord.gg/###" target="_blank">WIP</a>
+    <section aria-labelledby="discord">
+      <h2 id="discord">Community</h2>
+      <p class="small">Discord invite: <span class="badge">WIP</span></p>
     </section>
 
-    <section>
-      <h2>About Me</h2>
-      <p><strong>Name:</strong> Charlie (Lix)</p>
+    <section aria-labelledby="about">
+      <h2 id="about">About</h2>
+      <p class="small"><strong>Name:</strong> (private)</p>
       <p>I’m a passionate programmer and creator who loves building projects in Python, LuaU, and web technologies.</p>
     </section>
   </main>
 
-  <footer>
-    <p>© 2025 (dex)</p>
-  </footer>
+  <footer>© 2025 dex</footer>
+
+  <!-- minimal scripts for accessibility if needed -->
+  <script>
+    // nothing required on home page
+  </script>
 </body>
 </html>
