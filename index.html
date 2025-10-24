@@ -1,93 +1,51 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>sudo apt update && sudo apt upgrade -y && sudo apt install -y ubuntu-restricted-extras vlc gimp libreoffice thunderbird gufw gparted synaptic flatpak timeshift
- • Home</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Charlie (Lix) | Home</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f9; color: #333; margin: 0; padding: 0; }
+    header, footer { background: #111; color: #fff; text-align: center; padding: 1em 0; }
+    nav a { color: #fff; margin: 0 15px; text-decoration: none; font-weight: bold; }
+    nav a:hover { text-decoration: underline; }
+    main { max-width: 800px; margin: 2em auto; padding: 1em; background: #fff; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    section { margin-bottom: 2em; }
+    h1, h2 { color: #222; }
+    .discord-link { display: inline-block; background: #5865F2; color: #fff; padding: 10px 20px; border-radius: 5px; text-decoration: none; }
+    .discord-link:hover { background: #4752C4; }
+  </style>
 </head>
-<body class="page">
-  <nav class="nav">
-    <div class="nav-left">
-      <a class="brand" href="index.html" aria-label="Home">
-        <svg viewBox="0 0 48 48" class="logo"><circle cx="24" cy="24" r="22" /></svg>
-        <span class="brand-text">Lix Bio</span>
-      </a>
-    </div>
-    <div class="nav-right">
-      <a class="nav-link" href="index.html">Home</a>
-      <a class="nav-link" href="about.html">About</a>
-      <a class="nav-link" href="journey.html">Journey</a>
-    </div>
-    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
-  </nav>
+<body>
+  <header>
+    <h1>Welcome to My Developer Site</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="tutorials.html">Tutorials</a>
+      <a href="tools.html">Tools</a>
+    </nav>
+  </header>
 
-  <main class="container hero">
-    <div class="hero-card">
-      <h1 class="hero-title">
-        <span class="typewriter" data-text='["Hello — I am Lix.","Welcome to my biography.","Explore my story."]'></span>
-      </h1>
+  <main>
+    <section>
+      <h2>About This Site</h2>
+      <p>Welcome! This site is a hub for learning and exploring programming. You’ll find tutorials for Python and LuaU, as well as useful tools and links to help you get started coding.</p>
+    </section>
 
-      <p class="hero-sub">A living, breathing micro-site — sleek, blue, and interactive.</p>
+    <section>
+      <h2>Join My Discord</h2>
+      <a class="discord-link" href="https://discord.gg/###" target="_blank">WIP</a>
+    </section>
 
-      <div class="hero-cta">
-        <a class="btn btn-primary glow" href="about.html" role="button">About</a>
-        <a class="btn btn-outline glow" href="journey.html" role="button">Journey</a>
-      </div>
-
-      <div class="mini-info">
-        <div class="spark">
-          <svg class="spark-icon" viewBox="0 0 24 24"><path d="M12 2 L15 9 L22 10 L17 14 L18 21 L12 18 L6 21 L7 14 L2 10 L9 9 Z"/></svg>
-          <span>Interactive animations • responsive • accessible</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="floating-cards">
-      <div class="card small float" aria-hidden="true">
-        <strong>Faith</strong><span>Guiding light</span>
-      </div>
-      <div class="card small float delay" aria-hidden="true">
-        <strong>Design</strong><span>Visualizing ideas</span>
-      </div>
-      <div class="card small float delay-long" aria-hidden="true">
-        <strong>Adventure</strong><span>Ongoing</span>
-      </div>
-    </div>
+    <section>
+      <h2>About Me</h2>
+      <p><strong>Name:</strong> Charlie (Lix)</p>
+      <p>I’m a passionate programmer and creator who loves building projects in Python, LuaU, and web technologies.</p>
+    </section>
   </main>
 
-  <footer class="footer">
-    <small>© <span id="year"></span> Lix Bio — Built with intention</small>
+  <footer>
+    <p>© 2025 (dex)</p>
   </footer>
-
-  <script>
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Typewriter: cycles through provided phrases
-    (function(){
-      const el = document.querySelector('.typewriter');
-      const texts = JSON.parse(el.getAttribute('data-text'));
-      let i = 0, char = 0, forward = true, wait = 1000;
-      function step(){
-        const txt = texts[i];
-        if (forward) {
-          el.textContent = txt.slice(0, ++char);
-          if (char === txt.length) { forward = false; setTimeout(step, wait); return; }
-        } else {
-          el.textContent = txt.slice(0, --char);
-          if (char === 0) { forward = true; i = (i+1) % texts.length; }
-        }
-        setTimeout(step, forward ? 60 : 30);
-      }
-      step();
-    })();
-
-    // Nav toggle for small screens
-    document.querySelector('.nav-toggle').addEventListener('click', () => {
-      document.body.classList.toggle('nav-open');
-    });
-  </script>
 </body>
 </html>
