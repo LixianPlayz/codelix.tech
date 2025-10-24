@@ -108,4 +108,129 @@ part.Position = Vector3.new(0, 10, 0)</pre>
         <article class="ac-item">
           <div class="ac-header" data-target="lua-3">
             <div class="ac-title">Connecting a Function</div>
-            <button class="ac-tog
+            <button class="ac-toggle" aria-expanded="false">+</button>
+          </div>
+          <div id="lua-3" class="ac-content" aria-hidden="true">
+            <pre data-lang="lua">local part = game.Workspace.Part
+part.Touched:Connect(function(hit)
+    print(hit.Name .. " touched the part!")
+end)</pre>
+            <div class="copy-row"><button class="copy-btn">Copy</button></div>
+            <p class="small">Connect functions to events like Touched so code runs when something happens.</p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <p style="margin-top:16px"><a href="index.html">← Back to Home</a></p>
+  </main>
+
+  <footer>© 2025 dex</footer>
+
+  <script>
+  /* Accordion + copy + local syntax highlight (basic) */
+
+  // escape HTML - used before injecting highlighted code
+  function escapeHtml(s){
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  // very small keyword highlighter for python and lua
+  function highlightText(code, lang){
+    code = escapeHtml(code);
+    if(lang === 'python'){
+      // comments
+      code = code.replace(/#(.*)$/gm, '<span class="token comment">#$1</span>');
+      // strings
+      code = code.replace(/(\"\"\"[\s\S]*?\"\"\"|\'\'\'[\s\S]*?\'\'\'|"(?:\\.|[^"])*"|'(?:\\.|[^'])*')/g, '<span class="token string">$1</span>');
+      // numbers
+      code = code.replace(/\b(\d+(\.\d+)?)\b/g, '<span class="token number">$1</span>');
+      // keywords (small list)
+      const kw = ['def','for','in','range','print','return','if','else','elif','while','break','continue','import','from','as','class','with','try','except','True','False','None','and','or','not','pass','global','lambda'];
+      const re = new RegExp('\\b(' + kw.join('|') + ')\\b','g');
+      code = code.replace(re, '<span class="token keyword">$1</span>');
+      // function names (simple)
+      code = code.replace(/(\b[a-zA-Z_][a-zA-Z0-9_]*)(?=\s*\()/g, '<span class="token func">$1</span>');
+    } else if(lang === 'lua'){
+      // comments -- single line and multiline
+      code = code.replace(/--\[\[[\s\S]*?\]\]--?/g, function(m){ return '<span class="token comment">'+escapeHtml(m)+'</span>'; });
+      code = code.replace(/--(.*)$/gm, '<span class="token comment">--$1</span>');
+      // strings
+      code = code.replace(/(\"(?:\\.|[^"])*\"|'(?:\\.|[^'])*')/g, '<span class="token string">$1</span>');
+      // numbers
+      code = code.replace(/\b(\d+(\.\d+)?)\b/g, '<span class="token number">$1</span>');
+      // keywords
+      const kw = ['local','function','end','if','then','else','elseif','for','in','do','while','repeat','until','return','nil','true','false','and','or','not'];
+      const re = new RegExp('\\b(' + kw.join('|') + ')\\b','g');
+      code = code.replace(re, '<span class="token keyword">$1</span>');
+      // simple function name highlight
+      code = code.replace(/(\b[a-zA-Z_][a-zA-Z0-9_]*)(?=\s*=?\s*function|\s*\()/g, '<span class="token func">$1</span>');
+    }
+    return code;
+  }
+
+  // apply highlight to all pre[data-lang]
+  document.querySelectorAll('pre[data-lang]').forEach(pre=>{
+    const lang = pre.getAttribute('data-lang') || '';
+    const raw = pre.textContent;
+    pre.innerHTML = highlightText(raw, lang);
+  });
+
+  // Accordion toggle
+  document.querySelectorAll('.ac-header').forEach(header=>{
+    header.addEventListener('click', ()=>{
+      const targetId = header.dataset.target;
+      const content = document.getElementById(targetId);
+      const toggleBtn = header.querySelector('.ac-toggle');
+      const isOpen = content.classList.contains('open');
+      // close any other within same accordion (optional single-open behavior)
+      const parent = header.closest('.accordion');
+      if(parent){
+        parent.querySelectorAll('.ac-content.open').forEach(c=>{
+          if(c.id !== targetId){ c.classList.remove('open'); c.style.maxHeight = null; c.previousElementSibling && c.previousElementSibling.querySelector('.ac-toggle').setAttribute('aria-expanded','false'); c.setAttribute('aria-hidden','true'); }
+        });
+      }
+      if(!isOpen){
+        content.classList.add('open');
+        content.style.maxHeight = content.scrollHeight + 'px';
+        toggleBtn.textContent = '−';
+        toggleBtn.setAttribute('aria-expanded','true');
+        content.setAttribute('aria-hidden','false');
+      } else {
+        content.classList.remove('open');
+        content.style.maxHeight = null;
+        toggleBtn.textContent = '+';
+        toggleBtn.setAttribute('aria-expanded','false');
+        content.setAttribute('aria-hidden','true');
+      }
+    });
+  });
+
+  // copy button behavior
+  document.querySelectorAll('.copy-row .copy-btn').forEach(btn=>{
+    btn.addEventListener('click', async (e)=>{
+      const pre = btn.closest('.ac-content').querySelector('pre');
+      const text = pre.textContent;
+      try{
+        await navigator.clipboard.writeText(text);
+        btn.classList.add('copied');
+        btn.textContent = 'Copied';
+        setTimeout(()=>{ btn.classList.remove('copied'); btn.textContent='Copy'; }, 1400);
+      }catch(err){
+        // fallback
+        const ta = document.createElement('textarea');
+        ta.value = text; document.body.appendChild(ta); ta.select();
+        try{ document.execCommand('copy'); btn.textContent='Copied'; setTimeout(()=>{btn.textContent='Copy'},1400); }catch(e){ alert('Copy failed') }
+        ta.remove();
+      }
+    });
+  });
+
+  // Ensure any content opened by default (none) has proper size on load/resizes
+  window.addEventListener('resize', ()=> {
+    document.querySelectorAll('.ac-content.open').forEach(c => c.style.maxHeight = c.scrollHeight + 'px');
+  });
+  </script>
+</body>
+</html>
