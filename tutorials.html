@@ -1,25 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tutorials | Charlie (Lix)</title>
-  <style>
-    body { font-family: Arial, sans-serif; background: #f4f4f9; color: #333; margin: 0; padding: 0; }
-    header, footer { background: #111; color: #fff; text-align: center; padding: 1em 0; }
-    nav a { color: #fff; margin: 0 15px; text-decoration: none; font-weight: bold; }
-    nav a:hover { text-decoration: underline; }
-    main { max-width: 900px; margin: 2em auto; padding: 1em; background: #fff; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-    section { margin-bottom: 2em; }
-    pre { background: #272822; color: #f8f8f2; padding: 10px; border-radius: 5px; overflow-x: auto; }
-    code { font-family: Consolas, monospace; }
-    a.back { display: inline-block; margin-top: 1em; text-decoration: none; background: #111; color: #fff; padding: 10px 20px; border-radius: 5px; }
-    a.back:hover { background: #333; }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Tutorials</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <h1>Tutorials</h1>
     <nav>
       <a href="index.html">Home</a>
       <a href="tutorials.html">Tutorials</a>
@@ -28,51 +16,96 @@
   </header>
 
   <main>
-    <section>
-      <h2>Python Coding Tutorials</h2>
+    <section aria-labelledby="tutorial-nav">
+      <h1 id="tutorial-nav">Tutorials</h1>
+      <nav style="display:flex;gap:10px;margin-top:10px;">
+        <a href="#python">Python</a>
+        <a href="#luau">LuaU</a>
+      </nav>
+    </section>
 
-      <h3>1. Printing Text</h3>
-      <pre><code>print("Hello, world!")</code></pre>
-      <p>This prints text to the console. Great for checking if your code runs correctly!</p>
+    <section id="python" aria-labelledby="pytitle">
+      <h2 id="pytitle">Python Coding Tutorials</h2>
+      <div class="accordion" id="py-accordion">
 
-      <h3>2. Loops</h3>
-      <pre><code>for i in range(5):
-    print("Number:", i)</code></pre>
-      <p>This loop runs five times, printing the numbers 0 through 4.</p>
+        <!-- Snippet 1 -->
+        <article class="ac-item">
+          <div class="ac-header" data-target="py-1">
+            <div class="ac-title">Printing Text</div>
+            <button class="ac-toggle" aria-expanded="false">+</button>
+          </div>
+          <div id="py-1" class="ac-content" aria-hidden="true">
+            <pre data-lang="python">print("Hello, world!")</pre>
+            <div class="copy-row"><button class="copy-btn">Copy</button></div>
+            <p class="small">Print sends text to the console. Great for quick tests and learning output behavior.</p>
+          </div>
+        </article>
 
-      <h3>3. Functions</h3>
-      <pre><code>def greet(name):
+        <!-- Snippet 2 -->
+        <article class="ac-item">
+          <div class="ac-header" data-target="py-2">
+            <div class="ac-title">Loops</div>
+            <button class="ac-toggle" aria-expanded="false">+</button>
+          </div>
+          <div id="py-2" class="ac-content" aria-hidden="true">
+            <pre data-lang="python">for i in range(5):
+    print("Number:", i)</pre>
+            <div class="copy-row"><button class="copy-btn">Copy</button></div>
+            <p class="small">Loops run repeated tasks. This prints numbers 0 through 4.</p>
+          </div>
+        </article>
+
+        <!-- Snippet 3 -->
+        <article class="ac-item">
+          <div class="ac-header" data-target="py-3">
+            <div class="ac-title">Functions</div>
+            <button class="ac-toggle" aria-expanded="false">+</button>
+          </div>
+          <div id="py-3" class="ac-content" aria-hidden="true">
+            <pre data-lang="python">def greet(name):
     print("Hello, " + name + "!")
 
-greet("Charlie")</code></pre>
-      <p>Functions help you reuse code. This one greets the person whose name you pass in.</p>
+greet("Dex")</pre>
+            <div class="copy-row"><button class="copy-btn">Copy</button></div>
+            <p class="small">Functions package reusable behavior. Call them with parameters to vary their output.</p>
+          </div>
+        </article>
+      </div>
     </section>
 
-    <section>
-      <h2>LuaU Coding Tutorials</h2>
+    <section id="luau" aria-labelledby="luautitle">
+      <h2 id="luautitle">LuaU Coding Tutorials</h2>
+      <div class="accordion" id="lua-accordion">
 
-      <h3>1. Printing a Message</h3>
-      <pre><code>print("Hello, Roblox!")</code></pre>
-      <p>This prints text to the Roblox output console. It’s a simple way to test scripts.</p>
+        <!-- LuaU 1 -->
+        <article class="ac-item">
+          <div class="ac-header" data-target="lua-1">
+            <div class="ac-title">Printing a Message</div>
+            <button class="ac-toggle" aria-expanded="false">+</button>
+          </div>
+          <div id="lua-1" class="ac-content" aria-hidden="true">
+            <pre data-lang="lua">print("Hello, Roblox!")</pre>
+            <div class="copy-row"><button class="copy-btn">Copy</button></div>
+            <p class="small">Use print to test scripts in the Roblox output console.</p>
+          </div>
+        </article>
 
-      <h3>2. Moving a Part</h3>
-      <pre><code>local part = game.Workspace.Part
-part.Position = Vector3.new(0, 10, 0)</code></pre>
-      <p>This script moves a part to a new position in the workspace.</p>
+        <!-- LuaU 2 -->
+        <article class="ac-item">
+          <div class="ac-header" data-target="lua-2">
+            <div class="ac-title">Moving a Part</div>
+            <button class="ac-toggle" aria-expanded="false">+</button>
+          </div>
+          <div id="lua-2" class="ac-content" aria-hidden="true">
+            <pre data-lang="lua">local part = game.Workspace.Part
+part.Position = Vector3.new(0, 10, 0)</pre>
+            <div class="copy-row"><button class="copy-btn">Copy</button></div>
+            <p class="small">Change a Part's Position to move it in the world (server or local depending on script).</p>
+          </div>
+        </article>
 
-      <h3>3. Connecting a Function</h3>
-      <pre><code>local part = game.Workspace.Part
-part.Touched:Connect(function(hit)
-    print(hit.Name .. " touched the part!")
-end)</code></pre>
-      <p>This connects a function that runs when the part is touched, printing what touched it.</p>
-    </section>
-
-    <a class="back" href="index.html">← Back to Home</a>
-  </main>
-
-  <footer>
-    <p>© 2025 (dex)</p>
-  </footer>
-</body>
-</html>
+        <!-- LuaU 3 -->
+        <article class="ac-item">
+          <div class="ac-header" data-target="lua-3">
+            <div class="ac-title">Connecting a Function</div>
+            <button class="ac-tog
