@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tutorials | Charlie (Lix)</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f9; color: #333; margin: 0; padding: 0; }
+    header, footer { background: #111; color: #fff; text-align: center; padding: 1em 0; }
+    nav a { color: #fff; margin: 0 15px; text-decoration: none; font-weight: bold; }
+    nav a:hover { text-decoration: underline; }
+    main { max-width: 900px; margin: 2em auto; padding: 1em; background: #fff; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    section { margin-bottom: 2em; }
+    pre { background: #272822; color: #f8f8f2; padding: 10px; border-radius: 5px; overflow-x: auto; }
+    code { font-family: Consolas, monospace; }
+    a.back { display: inline-block; margin-top: 1em; text-decoration: none; background: #111; color: #fff; padding: 10px 20px; border-radius: 5px; }
+    a.back:hover { background: #333; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Tutorials</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="tutorials.html">Tutorials</a>
+      <a href="tools.html">Tools</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>Python Coding Tutorials</h2>
+
+      <h3>1. Printing Text</h3>
+      <pre><code>print("Hello, world!")</code></pre>
+      <p>This prints text to the console. Great for checking if your code runs correctly!</p>
+
+      <h3>2. Loops</h3>
+      <pre><code>for i in range(5):
+    print("Number:", i)</code></pre>
+      <p>This loop runs five times, printing the numbers 0 through 4.</p>
+
+      <h3>3. Functions</h3>
+      <pre><code>def greet(name):
+    print("Hello, " + name + "!")
+
+greet("Charlie")</code></pre>
+      <p>Functions help you reuse code. This one greets the person whose name you pass in.</p>
+    </section>
+
+    <section>
+      <h2>LuaU Coding Tutorials</h2>
+
+      <h3>1. Printing a Message</h3>
+      <pre><code>print("Hello, Roblox!")</code></pre>
+      <p>This prints text to the Roblox output console. It’s a simple way to test scripts.</p>
+
+      <h3>2. Moving a Part</h3>
+      <pre><code>local part = game.Workspace.Part
+part.Position = Vector3.new(0, 10, 0)</code></pre>
+      <p>This script moves a part to a new position in the workspace.</p>
+
+      <h3>3. Connecting a Function</h3>
+      <pre><code>local part = game.Workspace.Part
+part.Touched:Connect(function(hit)
+    print(hit.Name .. " touched the part!")
+end)</code></pre>
+      <p>This connects a function that runs when the part is touched, printing what touched it.</p>
+    </section>
+
+    <a class="back" href="index.html">← Back to Home</a>
+  </main>
+
+  <footer>
+    <p>© 2025 (dex)</p>
+  </footer>
+</body>
+</html>
