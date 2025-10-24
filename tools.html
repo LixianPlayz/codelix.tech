@@ -1,24 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tools | Charlie (Lix)</title>
-  <style>
-    body { font-family: Arial, sans-serif; background: #f4f4f9; color: #333; margin: 0; padding: 0; }
-    header, footer { background: #111; color: #fff; text-align: center; padding: 1em 0; }
-    nav a { color: #fff; margin: 0 15px; text-decoration: none; font-weight: bold; }
-    nav a:hover { text-decoration: underline; }
-    main { max-width: 800px; margin: 2em auto; padding: 1em; background: #fff; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-    ul { list-style-type: none; padding: 0; }
-    li { margin: 10px 0; }
-    a.tool-link { color: #0056b3; text-decoration: none; }
-    a.tool-link:hover { text-decoration: underline; }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Tools</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <h1>Developer Tools & Resources</h1>
     <nav>
       <a href="index.html">Home</a>
       <a href="tutorials.html">Tutorials</a>
@@ -27,19 +16,35 @@
   </header>
 
   <main>
-    <section>
-      <h2>Get Started with Coding</h2>
-      <ul>
-        <li><a class="tool-link" href="https://code.visualstudio.com/" target="_blank">Visual Studio Code</a> — A free, powerful code editor for any programming language.</li>
-        <li><a class="tool-link" href="https://www.codecademy.com/" target="_blank">Codecademy</a> — Interactive courses for learning programming basics.</li>
-        <li><a class="tool-link" href="https://www.python.org/downloads/" target="_blank">Python Downloads</a> — Install Python for your computer.</li>
-        <li><a class="tool-link" href="https://create.roblox.com/" target="_blank">Roblox Creator Hub</a> — Learn LuaU scripting and build Roblox games.</li>
+    <section aria-labelledby="tools">
+      <h1 id="tools">Developer Tools</h1>
+
+      <h2 style="margin-top:12px">Editors</h2>
+      <ul class="tools-list">
+        <li><a href="https://code.visualstudio.com/" target="_blank" rel="noopener">Visual Studio Code</a> — versatile editor with extensions support.</li>
+        <li><a href="https://www.sublimetext.com/" target="_blank" rel="noopener">Sublime Text</a> — lightweight, fast editor.</li>
       </ul>
+
+      <h2 style="margin-top:12px">Learning</h2>
+      <ul class="tools-list">
+        <li><a href="https://www.codecademy.com/" target="_blank" rel="noopener">Codecademy</a></li>
+        <li><a href="https://www.freecodecamp.org/" target="_blank" rel="noopener">freeCodeCamp</a></li>
+        <li><a href="https://www.python.org/downloads/" target="_blank" rel="noopener">Python Downloads</a></li>
+      </ul>
+
+      <h2 style="margin-top:12px">Game Dev / Roblox</h2>
+      <ul class="tools-list">
+        <li><a href="https://create.roblox.com/" target="_blank" rel="noopener">Roblox Creator Hub</a></li>
+        <li><a href="https://developer.roblox.com/" target="_blank" rel="noopener">Roblox Developer Docs</a></li>
+      </ul>
+
     </section>
   </main>
 
-  <footer>
-    <p>© 2025 (dex)</p>
-  </footer>
+  <footer>© 2025 dex</footer>
+
+  <script>
+    // nothing special; local-only links
+  </script>
 </body>
 </html>
