@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tabbed Scripts — LocalStorage Editor</title>
+  <style>
+    :root{--accent:#4f46e5;--bg:#0f172a;--panel:#0b1220;--muted:#94a3b8;color-scheme:dark}
+    *{box-sizing:border-box;font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,#071025 0%,#06111a 100%);color:#e6eef8}
+    .app{display:flex;height:100vh;gap:16px;padding:18px}
+    .sidebar{width:260px;background:rgba(255,255,255,0.03);border-radius:12px;padding:12px;display:flex;flex-direction:column}
+    .tabs{flex:1;overflow:auto;margin-top:8px}
+    .tab{display:flex;align-items:center;justify-content:space-between;padding:8px;border-radius:8px;margin-bottom:8px;cursor:pointer}
+    .tab.active{background:linear-gradient(90deg,rgba(79,70,229,0.16),rgba(79,70,229,0.08));box-shadow:0 6px 18px rgba(79,70,229,0.06)}
+    .tab .title{flex:1;padding-right:8px;word-break:break-all}
+    .controls{display:flex;gap:8px}
+    button{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 10px;border-radius:8px;color:inherit;cursor:pointer}
+    button.primary{background:var(--accent);border:0;color:white}
+    .main{flex:1;display:flex;flex-direction:column;gap:12px}
+    .header{display:flex;gap:8px;align-items:center}
+    .editor{flex:1;background:#071024;border-radius:12px;padding:12px;display:flex;flex-direction:column}
+    textarea{width:100%;height:100%;background:transparent;border:0;color:inherit;resize:none;outline:none;font-family:monospace;font-size:13px}
+    .footer{display:flex;gap:8px;align-items:center}
+    .iframe-wrap{height:240px;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,0.04);background:#020617}
+    .small{font-size:12px;color:var(--muted)}
+    input[type=file]{display:none}
+  </style>
+</head>
+<body>
+  <div class="app" role="application">
+    <aside class="sidebar" aria-label="tabs sidebar">
+      <div style="display:flex;gap:8px;align-items:center;justify-content:space-between">
+        <strong>Tabs</strong>
+        <div class="controls">
+          <button id="newTabBtn" title="New tab">New</button>
+          <button id="exportBtn" title="Export">Export</button>
+          <button id="importBtn" title="Import">Import</button>
+        </div>
+      </div>
+      <div class="tabs" id="tabsList" role="list"></div>
+      <div style="margin-top:8px" class="small">Autosaves to localStorage. Use Export to backup. Import accepts JSON.</div>
+    </aside>
+
+    <main class="main">
+      <div class="header">
+        <div style="flex:1;display:flex;gap:8px;align-items:center">
+          <div class="small">Selected:</div>
+          <div id="selectedTitle" style="font-weight:600">(none)</div>
+        </div>
+        <div style="display:flex;gap:8px">
+          <button id="renameBtn">Rename</button>
+          <button id="deleteBtn">Delete</button>
+          <button id="runBtn" class="primary">Run</button>
+          <button id="downloadBtn">Download</button>
+        </div>
+      </div>
+
+      <section class="editor">
+        <textarea id="editor" placeholder="Write a string or JS script here... (auto-saved)"></textarea>
+      </section>
+
+      <div class="footer">
+        <div style="flex:1;display:flex;gap:8px;align-items:center">
+          <label class="small">Preview / Run output</label>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button id="clearStorage">Clear All</button>
+          <button id="backupBtn">Backup JSON</button>
+        </div>
+      </div>
+
+      <div class="iframe-wrap" id="outputWrap">
+        <iframe id="runner" sandbox="allow-scripts" style="width:100%;height:100%;border:0;background:white"></iframe>
+      </div>
+    </main>
+  </div>
+
+  <input type="file" id="fileInput" accept="application/json">
+
+  <script>
+    // Simple tabbed editor that stores tabs in localStorage
+    const STORAGE_KEY = 'tabbedScripts_v1';
+    let state = {tabs:[], selectedId: null};
+
+    const tabsList = document.getElementById('tabsList');
+    const newTabBtn = document.getElementById('newTabBtn');
+    const editor = document.getElementById('editor');
+    const selectedTitle = document.getElementById('selectedTitle');
+    const renameBtn = document.getElementById('renameBtn');
+    const deleteBtn = document.getElementById('deleteBtn');
+    const runBtn = document.getElementById('runBtn');
+    const runner = document.getElementById('runner');
+    const exportBtn = document.getElementById('exportBtn');
+    const importBtn = document.getElementById('importBtn');
+    const fileInput = document.getElementById('fileInput');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const clearStorage = document.getElementById('clearStorage');
+    const backupBtn = document.getElementById('backupBtn');
+
+    function saveState(){
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function loadState(){
+      try{
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if(raw){ state = JSON.parse(raw); }
+      }catch(e){ console.error('Failed to load state', e); }
+      if(!state.tabs || !Array.isArray(state.tabs)) state = {tabs:[], selectedId:null};
+    }
+
+    function uid(){return Math.random().toString(36).slice(2,9)}
+
+    function addTab(title='untitled', content=''){
+      const id = uid();
+      state.tabs.push({id,title,content});
+      state.selectedId = id;
+      saveState();
+      renderTabs();
+      loadSelected();
+    }
+
+    function renderTabs(){
+      tabsList.innerHTML='';
+      state.tabs.forEach(t=>{
+        const el = document.createElement('div');
+        el.className='tab'+(t.id===state.selectedId?' active':'');
+        el.setAttribute('role','listitem');
+        const title = document.createElement('div'); title.className='title'; title.textContent = t.title;
+        el.appendChild(title);
+        const btns = document.createElement('div'); btns.style.display='flex'; btns.style.gap='6px';
+        const sel = document.createElement('button'); sel.textContent='Open'; sel.onclick=(e)=>{state.selectedId=t.id; saveState(); renderTabs(); loadSelected();};
+        const dup = document.createElement('button'); dup.textContent='Dup'; dup.onclick=(e)=>{state.tabs.push({id:uid(),title:t.title+' (copy)',content:t.content}); saveState(); renderTabs();};
+        btns.appendChild(sel); btns.appendChild(dup);
+        el.appendChild(btns);
+        tabsList.appendChild(el);
+      })
+    }
+
+    function loadSelected(){
+      const t = state.tabs.find(x=>x.id===state.selectedId);
+      if(!t){ selectedTitle.textContent='(none)'; editor.value=''; return; }
+      selectedTitle.textContent = t.title;
+      editor.value = t.content;
+    }
+
+    editor.addEventListener('input', ()=>{
+      const t = state.tabs.find(x=>x.id===state.selectedId);
+      if(t){ t.content = editor.value; saveState(); }
+    });
+
+    newTabBtn.addEventListener('click', ()=>{
+      const name = prompt('Tab name','New Tab');
+      if(name!==null) addTab(name, '');
+    });
+
+    renameBtn.addEventListener('click', ()=>{
+      const t = state.tabs.find(x=>x.id===state.selectedId);
+      if(!t){ alert('No tab selected'); return; }
+      const name = prompt('Rename tab', t.title);
+      if(name!==null){ t.title = name; saveState(); renderTabs(); loadSelected(); }
+    });
+
+    deleteBtn.addEventListener('click', ()=>{
+      if(!state.selectedId){ alert('No tab selected'); return; }
+      if(!confirm('Delete selected tab?')) return;
+      state.tabs = state.tabs.filter(x=>x.id!==state.selectedId);
+      state.selectedId = state.tabs.length? state.tabs[0].id : null;
+      saveState(); renderTabs(); loadSelected();
+    });
+
+    runBtn.addEventListener('click', ()=>{
+      const t = state.tabs.find(x=>x.id===state.selectedId);
+      if(!t){ alert('No tab selected'); return; }
+      // Execute as HTML/JS in sandboxed iframe. If content contains <html> tag, use raw; otherwise wrap it in <script>
+      let html = t.content;
+      if(!/<html|<body|<script/i.test(html)){
+        // treat as JS only -> wrap in template that prints console to DOM
+        html = `<!doctype html><html><head><meta charset=\"utf-8\"></head><body><pre id=out></pre><script>const out=document.getElementById('out');console.log=msg=>{try{out.appendChild(document.createTextNode(typeof msg==='object'?JSON.stringify(msg,null,2):String(msg)));out.appendChild(document.createElement('br'))}catch(e){} }\ntry{\n${t.content}\n}catch(e){console.log('Error: '+e)}<\/script></body></html>`;
+      }
+      const blob = new Blob([html], {type:'text/html'});
+      const url = URL.createObjectURL(blob);
+      runner.src = url;
+      setTimeout(()=>URL.revokeObjectURL(url), 20000);
+    });
+
+    exportBtn.addEventListener('click', ()=>{
+      const data = JSON.stringify(state, null, 2);
+      const blob = new Blob([data], {type:'application/json'});
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download='tabbed-scripts-backup.json'; a.click();
+      setTimeout(()=>URL.revokeObjectURL(a.href),20000);
+    });
+
+    importBtn.addEventListener('click', ()=> fileInput.click());
+    fileInput.addEventListener('change', async (e)=>{
+      const f = e.target.files[0]; if(!f) return;
+      try{
+        const text = await f.text();
+        const parsed = JSON.parse(text);
+        if(parsed && Array.isArray(parsed.tabs)){
+          if(confirm('Import will replace current tabs. Continue?')){
+            state = parsed; saveState(); renderTabs(); loadSelected();
+          }
+        } else alert('Invalid file format');
+      }catch(err){ alert('Failed to import: '+err.message) }
+      fileInput.value='';
+    });
+
+    downloadBtn.addEventListener('click', ()=>{
+      const t = state.tabs.find(x=>x.id===state.selectedId);
+      if(!t){ alert('No tab selected'); return; }
+      const blob = new Blob([t.content], {type:'text/plain'});
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download=(t.title||'script')+'.txt'; a.click();
+      setTimeout(()=>URL.revokeObjectURL(a.href),20000);
+    });
+
+    clearStorage.addEventListener('click', ()=>{
+      if(!confirm('Clear all stored tabs from this browser? This cannot be undone.')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      state = {tabs:[], selectedId:null}; renderTabs(); loadSelected();
+    });
+
+    backupBtn.addEventListener('click', ()=>{
+      const data = JSON.stringify(state, null, 2);
+      const blob = new Blob([data], {type:'application/json'});
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download='tabbed-scripts-backup-'+Date.now()+'.json'; a.click();
+      setTimeout(()=>URL.revokeObjectURL(a.href),20000);
+    });
+
+    // Initialize
+    loadState(); if(!state.tabs.length) addTab('Welcome','// Example: console.log(\"hello from tab\");\n');
+    renderTabs(); if(!state.selectedId && state.tabs.length) state.selectedId = state.tabs[0].id; loadSelected();
+  </script>
+</body>
+</html>
