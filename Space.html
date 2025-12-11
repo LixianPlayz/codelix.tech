@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Stellar Life: Newborn → Red Supergiant → Supernova → Black Hole</title>
+<style>
+  :root{
+    --bg:#050510;
+    --panel:#0b0b11a8;
+    --glass: rgba(255,255,255,0.04);
+  }
+  html,body{height:100%;margin:0;background:linear-gradient(180deg,#03030a 0%, #050510 60%, #000 100%);font-family:Inter,system-ui,Segoe UI,Roboto,Arial;}
+  .wrap{height:100%;display:grid;grid-template-rows:1fr auto;align-items:stretch;gap:12px;padding:18px;}
+  .canvas-wrap{display:flex;align-items:center;justify-content:center;position:relative;}
+  canvas{background:transparent;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,0.6);max-width:100%;width:900px;height:600px;}
+  .hud{
+    position:absolute;left:18px;top:18px;padding:10px 12px;background:var(--panel);backdrop-filter:blur(6px);border-radius:10px;color:#e9eef5;font-size:14px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.6);
+  }
+  .hud .label{opacity:0.85;font-weight:600}
+  .controls{display:flex;gap:8px;align-items:center;margin:6px 0;}
+  button{background:var(--glass);border:1px solid rgba(255,255,255,0.06);color:#e9eef5;padding:8px 10px;border-radius:8px;cursor:pointer}
+  button:active{transform:translateY(1px)}
+  footer{color:#9aa4b2;font-size:13px;text-align:center;padding-bottom:6px}
+  /* visual helpers for explosion particles */
+  .credits{position:absolute;right:18px;bottom:18px;color:#8b96a6;font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="canvas-wrap">
+    <canvas id="space" width="1600" height="900"></canvas>
+
+    <div class="hud" id="hud">
+      <div><span class="label">Age</span>: <strong id="ageText">0</strong> s</div>
+      <div><span class="label">Stage</span>: <strong id="stageText">Newborn</strong></div>
+      <div class="controls" style="margin-top:8px">
+        <button id="toggleBtn">Pause</button>
+        <button id="resetBtn">Reset</button>
+        <button id="speedBtn">x1</button>
+      </div>
+      <div style="font-size:12px;margin-top:6px;color:#c8d2df">Every second the star ages. When it reaches the red supergiant stage it goes supernova then collapses into a black hole.</div>
+    </div>
+
+    <div class="credits">Visual: canvas animation • Code: JS</div>
+  </div>
+
+  <footer id="footer">Stellar timeline (seconds): newborn 0–6 → main sequence 7–14 → red supergiant 15–19 → supernova at 20 → black hole at end</footer>
+</div>
+
+<script>
+/*
+  Stellar life simulation (seconds = time steps).
+  - Age increments every "real" second scaled by speed multiplier.
+  - Stages:
+      0–6   : Newborn (blue, small)
+      7–14  : Main Sequence (yellow, stable)
+      15–19 : Red Supergiant (large, red) — at age >=20 triggers supernova
+      20    : Supernova explosion animation (particles + shockwave)
+      After explosion the remnant collapses into a Black Hole (dark, small) with accretion disk.
+*/
+
+const canvas = document.getElementById('space');
+const ctx = canvas.getContext('2d');
+let W = canvas.width, H = canvas.height;
+
+const ageText = document.getElementById('ageText');
+const stageText = document.getElementById('stageText');
+const toggleBtn = document.getElementById('toggleBtn');
+const resetBtn = document.getElementById('resetBtn');
+const speedBtn = document.getElementById('speedBtn');
+
+let running = true;
+let age = 0;                // seconds
+let speed = 1;              // multiplier (1 = one age per second)
+let lastTick = performance.now();
+let accumulator = 0;
+let stage = 'Newborn';
+let animationState = 'normal'; // normal, supernova, blackhole, ended
+
+// Star properties
+let star = {
+  x: W/2, y: H/2,
+  baseRadius: 18,       // newborn radius
+  radius: 18,
+  color: {r: 180, g: 210, b: 255},
+  coreGlow: 1.6,
+  spin: 0
+};
+
+// particles for supernova
+let particles = [];
+let shock = {radius:0, max: Math.max(W,H), alpha:0};
+
+function resize(){
+  // keep logical size large and scale with CSS; but canvas maintained pixels > good
+  W = canvas.width = Math.min(window.innerWidth*1.6,1600);
+  H = canvas.height = Math.min(window.innerHeight*1.6,900);
+  star.x = W/2; star.y = H/2;
+}
+window.addEventListener('resize', resize);
+resize();
+
+function lerp(a,b,t){return a + (b-a)*t}
+function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
+function rgbToString(c){return `rgb(${c.r|0},${c.g|0},${c.b|0})`}
+
+function updateStageFromAge(){
+  if(animationState !== 'normal') return;
+  if(age <= 6) { stage = 'Newborn'; }
+  else if(age <= 14) { stage = 'Main Sequence'; }
+  else if(age <= 19) { stage = 'Red Supergiant'; }
+  else if(age >= 20) {
+    stage = 'Supernova';
+    animationState = 'supernova';
+    triggerSupernova();
+  }
+  stageText.textContent = stage;
+}
+
+function triggerSupernova(){
+  // create many ejecta particles
+  particles = [];
+  const count = 220;
+  for(let i=0;i<count;i++){
+    const angle = Math.random()*Math.PI*2;
+    const speed = 1.4 + Math.random()*6;
+    particles.push({
+      x: star.x, y: star.y,
+      vx: Math.cos(angle)*speed * (0.8 + Math.random()*1.8),
+      vy: Math.sin(angle)*speed * (0.8 + Math.random()*1.8),
+      life: 60 + Math.random()*80,
+      age: 0,
+      size: 1 + Math.random()*4,
+      color: { // rich explosion palette
+        r: 200 + Math.random()*55,
+        g: 80 + Math.random()*120,
+        b: 20 + Math.random()*40
+      }
+    });
+  }
+  shock.radius = star.radius*0.7;
+  shock.alpha = 1;
+  // expand star briefly
+  star.radius *= 1.8;
+  // schedule collapse to black hole after some time
+  setTimeout(()=>{ beginCollapseToBlackHole(); }, 2000);
+}
+
+function beginCollapseToBlackHole(){
+  animationState = 'collapsing';
+  // accelerate particle fade and shock fade
+  // after short delay finalize black hole
+  setTimeout(()=>{
+    animationState = 'blackhole';
+    finalizeBlackHole();
+  }, 1400);
+}
+
+function finalizeBlackHole(){
+  // clear particles
+  particles = [];
+  shock.alpha = 0;
+  star.radius = 28; // remnant event horizon visual scale
+  // for black hole we'll draw a dark circle and accretion disk
+  animationState = 'blackhole';
+  stage = 'Black Hole';
+  stageText.textContent = stage;
+  ageText.textContent = age + ' s';
+  // stop increasing age (end state) OR keep counting? We'll keep it but no further transitions.
+}
+
+function reset(){
+  age = 0;
+  animationState = 'normal';
+  star.baseRadius = 18;
+  star.radius = 18;
+  star.color = {r:180,g:210,b:255};
+  star.coreGlow = 1.6;
+  particles = [];
+  shock.radius = 0;
+  shock.alpha = 0;
+  stage = 'Newborn';
+  stageText.textContent = stage;
+  ageText.textContent = age + ' s';
+  running = true;
+  toggleBtn.textContent = 'Pause';
+}
+
+toggleBtn.addEventListener('click', ()=>{ running = !running; toggleBtn.textContent = running ? 'Pause' : 'Resume'; });
+resetBtn.addEventListener('click', reset);
+speedBtn.addEventListener('click', ()=>{
+  if(speed === 1) { speed = 4; speedBtn.textContent = 'x4'; }
+  else if(speed === 4) { speed = 10; speedBtn.textContent = 'x10'; }
+  else { speed = 1; speedBtn.textContent = 'x1'; }
+});
+
+function stepSim(dtSec){
+  // dtSec is seconds elapsed (real-time). We scale age increment by speed.
+  if(running && animationState === 'normal'){
+    accumulator += dtSec * speed;
+    while(accumulator >= 1.0){
+      age += 1;
+      accumulator -= 1.0;
+      ageText.textContent = age + ' s';
+      updateStageFromAge();
+    }
+  }
+  // star parameter changes over age continuously for smooth visual:
+  // map age to radius & color depending on stage
+  if(animationState === 'normal'){
+    if(age <= 6){
+      // newborn: blue hot, small -> slight growth
+      const t = clamp(age / 6, 0, 1);
+      star.radius = lerp(18, 24, t);
+      star.color = {
+        r: lerp(200, 180, t),
+        g: lerp(230, 210, t),
+        b: lerp(255, 220, t)
+      };
+      star.coreGlow = lerp(1.6,1.2,t);
+    } else if(age <= 14){
+      // main sequence: more yellow, stable radius
+      const t = clamp((age-6)/8, 0, 1);
+      star.radius = lerp(24, 30, t);
+      star.color = {
+        r: lerp(180, 255, t),
+        g: lerp(210, 200, t),
+        b: lerp(200, 120, t)
+      };
+      star.coreGlow = lerp(1.2,1.0,t);
+    } else if(age <= 19){
+      // red supergiant: huge radius and red color
+      const t = clamp((age-14)/5, 0, 1);
+      star.radius = lerp(30, 160, t); // big
+      star.color = { r: lerp(255,220,t), g: lerp(120,80,t), b: lerp(80,60,t) };
+      star.coreGlow = lerp(1.0,0.8,t);
+    }
+  }
+
+  // update particles and shock always in case triggered
+  if(particles.length){
+    for(let p of particles){
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vx *= 0.995;
+      p.vy += 0.02; // gravity-ish slowdown
+      p.age++;
+    }
+    // remove dead
+    particles = particles.filter(p => p.age < p.life);
+  }
+  // shockwave expand and fade
+  if(shock.alpha > 0){
+    shock.radius += 18 + Math.random()*6;
+    shock.alpha *= 0.985;
+    if(shock.alpha < 0.02) shock.alpha = 0;
+  }
+
+  // star spin
+  star.spin += 0.002 * (1 + speed*0.1);
+}
+
+function drawBackground(){
+  // subtle starfield
+  ctx.fillStyle = 'rgba(0,0,0,0.15)';
+  ctx.fillRect(0,0,W,H);
+  // add some distant stars (static-looking)
+  for(let i=0;i<80;i++){
+    // draw a few with deterministic positions using seeded rand? Simple randomness each frame okay; but better to cache — but keep simple
+  }
+}
+
+function drawStar(){
+  const x = star.x, y = star.y, r = star.radius;
+  // core radial gradient
+  const grad = ctx.createRadialGradient(x, y, r*0.02, x, y, r);
+  grad.addColorStop(0, `rgba(${star.color.r|0},${star.color.g|0},${star.color.b|0},1)`);
+  grad.addColorStop(0.25, `rgba(${star.color.r|0},${star.color.g|0},${star.color.b|0},0.95)`);
+  grad.addColorStop(0.6, `rgba(${Math.max(0,star.color.r-40)|0},${Math.max(0,star.color.g-40)|0},${Math.max(0,star.color.b-40)|0},0.55)`);
+  grad.addColorStop(1, `rgba(0,0,0,0)`);
+  ctx.globalCompositeOperation = 'lighter';
+  ctx.beginPath();
+  ctx.fillStyle = grad;
+  ctx.arc(x,y,r,0,Math.PI*2);
+  ctx.fill();
+  ctx.globalCompositeOperation = 'source-over';
+
+  // small animated corona using strokes
+  ctx.save();
+  ctx.translate(x,y);
+  ctx.rotate(star.spin);
+  const rays = Math.max(8, Math.floor(r/6));
+  for(let i=0;i<rays;i++){
+    const a = (i/rays)*Math.PI*2;
+    const lx = Math.cos(a), ly = Math.sin(a);
+    const len = r * (0.06 + 0.18*Math.sin(performance.now()*0.001 + i));
+    ctx.strokeStyle = `rgba(${(star.color.r+20)|0},${(star.color.g+20)|0},${(star.color.b+20)|0},${0.06 + 0.12*Math.random()})`;
+    ctx.lineWidth = 1 + Math.random()*2;
+    ctx.beginPath();
+    ctx.moveTo(lx*(r*0.85), ly*(r*0.85));
+    ctx.lineTo(lx*(r+len), ly*(r+len));
+    ctx.stroke();
+  }
+  ctx.restore();
+
+  // subtle glow ring
+  ctx.beginPath();
+  ctx.fillStyle = `rgba(${star.color.r|0},${star.color.g|0},${star.color.b|0},${0.06})`;
+  ctx.arc(x,y,r*1.8,0,Math.PI*2);
+  ctx.fill();
+
+  // core bright flare
+  ctx.beginPath();
+  ctx.fillStyle = `rgba(255,255,255,${0.08 * star.coreGlow})`;
+  ctx.arc(x + Math.sin(performance.now()*0.004)*r*0.04, y + Math.cos(performance.now()*0.003)*r*0.03, r*0.28, 0, Math.PI*2);
+  ctx.fill();
+}
+
+function drawParticles(){
+  if(!particles.length) return;
+  ctx.save();
+  ctx.globalCompositeOperation = 'lighter';
+  for(let p of particles){
+    const lifeRatio = 1 - p.age / p.life;
+    ctx.beginPath();
+    const size = p.size * (0.6 + lifeRatio*0.8);
+    ctx.fillStyle = `rgba(${p.color.r|0},${p.color.g|0},${p.color.b|0},${clamp(lifeRatio,0,1)})`;
+    ctx.arc(p.x, p.y, size, 0, Math.PI*2);
+    ctx.fill();
+  }
+  ctx.restore();
+}
+
+function drawShockwave(){
+  if(shock.alpha <= 0) return;
+  ctx.save();
+  ctx.globalCompositeOperation = 'screen';
+  ctx.beginPath();
+  ctx.strokeStyle = `rgba(255,220,180,${shock.alpha*0.55})`;
+  ctx.lineWidth = 6 + Math.random()*5;
+  ctx.arc(star.x, star.y, shock.radius, 0, Math.PI*2);
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawBlackHole(){
+  const x = star.x, y = star.y;
+  // accretion disk: several luminous rings
+  ctx.save();
+  ctx.translate(x,y);
+  ctx.rotate(performance.now()*0.0005);
+  for(let i=0;i<4;i++){
+    const rad = 60 + i*22;
+    ctx.beginPath();
+    const alpha = 0.25/(i+1);
+    const width = 14 - i*2;
+    ctx.strokeStyle = `rgba(${200 - i*25},${90 + i*20},${20 + i*10},${alpha})`;
+    ctx.lineWidth = width;
+    ctx.arc(0,0,rad, 0, Math.PI*2);
+    ctx.stroke();
+  }
+  ctx.restore();
+
+  // event horizon (black)
+  ctx.beginPath();
+  ctx.fillStyle = '#000';
+  ctx.arc(x,y,28,0,Math.PI*2);
+  ctx.fill();
+
+  // lensing glow
+  ctx.beginPath();
+  const lg = ctx.createRadialGradient(x,y,28,x,y,88);
+  lg.addColorStop(0, 'rgba(0,0,0,0)');
+  lg.addColorStop(0.65, 'rgba(0,0,0,0.0)');
+  lg.addColorStop(1, 'rgba(0,0,0,0.9)');
+  ctx.fillStyle = lg;
+  ctx.arc(x,y,88,0,Math.PI*2);
+  ctx.fill();
+
+  // small jet (vertical)
+  ctx.save();
+  ctx.globalCompositeOperation = 'screen';
+  ctx.beginPath();
+  ctx.fillStyle = 'rgba(255,180,120,0.12)';
+  ctx.ellipse(x, y-180, 14, 60, 0, 0, Math.PI*2);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.fillStyle = 'rgba(255,180,120,0.08)';
+  ctx.ellipse(x, y+180, 12, 50, 0, 0, Math.PI*2);
+  ctx.fill();
+  ctx.restore();
+}
+
+function render(){
+  // clear
+  ctx.clearRect(0,0,W,H);
+
+  // faint background gradient
+  const bg = ctx.createLinearGradient(0,0,0,H);
+  bg.addColorStop(0,'#040410');
+  bg.addColorStop(1,'#000000');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0,0,W,H);
+
+  // background stars (static-ish): draw a seeded starfield once by using sin/cos with index
+  for(let i=0;i<140;i++){
+    const sx = (Math.sin(i*12.9898 + 1.2345)*43758.5453) % 1;
+    const sy = (Math.cos(i*7.1234 + 9.876)*12345.6789) % 1;
+    const x = (sx+1)%1 * W;
+    const y = (sy+1)%1 * H;
+    const size = (Math.abs(Math.sin(i*3.141)) * 1.6) + 0.2;
+    ctx.fillStyle = `rgba(255,255,255,${0.06 + (i%7===0?0.2:0)})`;
+    ctx.fillRect(x, y, size, size);
+  }
+
+  // draw shockwave if present (under particles)
+  drawShockwave();
+
+  if(animationState === 'blackhole'){
+    drawBlackHole();
+  } else {
+    drawStar();
+    drawParticles();
+  }
+
+  // HUD overlay (age & stage is DOM updated)
+}
+
+let lastFrame = performance.now();
+function frame(t){
+  const dt = (t - lastFrame) / 1000;
+  lastFrame = t;
+  stepSim(dt);
+  render();
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+// heartbeat timer to keep "every second" accurate even if tab throttled — use setInterval as fallback
+setInterval(()=>{
+  // keep ageText updated in case of slow frames
+  ageText.textContent = age + ' s';
+}, 500);
+
+// initial display
+ageText.textContent = '0 s';
+stageText.textContent = 'Newborn';
+</script>
+</body>
+</html>
