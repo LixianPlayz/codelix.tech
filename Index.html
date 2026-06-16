@@ -3,64 +3,61 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dream Observatory</title>
+  <title>HyperRail</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <canvas id="sky"></canvas>
+  <canvas id="world"></canvas>
 
-  <main class="shell">
-    <section class="hero">
-      <div>
-        <p class="eyebrow">Interactive Thought Engine</p>
-        <h1>Dream Observatory</h1>
-        <p class="subtext">
-          Capture strange ideas, launch them into orbit, and watch your thoughts become constellations.
-        </p>
-      </div>
+  <main class="interface">
+    <section class="intro" id="intro">
+      <p class="eyebrow">Experimental Transit Experience</p>
+      <h1>HyperRail</h1>
+      <p class="intro-text">
+        Board a silent high-speed rail line through cities, oceans, storms, tunnels, and endless synthetic landscapes.
+      </p>
 
-      <div class="orb">
-        <span></span>
-      </div>
+      <button id="enterCab">Enter Cab</button>
     </section>
 
-    <section class="control-panel">
-      <div class="composer">
-        <textarea id="dreamInput" placeholder="Write a strange idea, dream, invention, scene, or impossible question..."></textarea>
-
-        <div class="composer-actions">
-          <button id="saveDream">Launch Dream</button>
-          <button id="randomPrompt">Cosmic Prompt</button>
-          <button id="soundToggle">Sound Off</button>
-        </div>
+    <section class="cockpit hidden" id="cockpit">
+      <div class="top-strip">
+        <span id="routeName">NEW TOKYO → ATLANTIS</span>
+        <span id="weatherName">CLEAR SKY</span>
+        <span id="clock">06:00</span>
       </div>
 
-      <aside class="stats">
-        <div>
-          <span id="dreamCount">0</span>
-          <p>dreams stored</p>
-        </div>
-        <div>
-          <span id="starCount">0</span>
-          <p>stars mapped</p>
-        </div>
-      </aside>
-    </section>
+      <div class="dashboard">
+        <article>
+          <span id="speed">0</span>
+          <p>mph</p>
+        </article>
 
-    <section class="orbit-board" id="orbitBoard"></section>
+        <article>
+          <span id="distance">0.0</span>
+          <p>miles</p>
+        </article>
 
-    <section class="manual">
-      <h2>Controls</h2>
-      <div class="keys">
-        <kbd>Enter</kbd><span>Launch dream</span>
-        <kbd>R</kbd><span>Generate prompt</span>
-        <kbd>C</kbd><span>Clear orbit</span>
-        <kbd>S</kbd><span>Toggle sound</span>
+        <article>
+          <span id="phase">Boarding</span>
+          <p>status</p>
+        </article>
+      </div>
+
+      <div class="route-panel">
+        <button data-route="NEW TOKYO → ATLANTIS">Ocean Line</button>
+        <button data-route="OSAKA → ARCTIC GATE">Snow Line</button>
+        <button data-route="NEON-7 → DUSK CITY">Night Line</button>
+      </div>
+
+      <div class="announcement" id="announcement">
+        Welcome aboard HyperRail service 07.
       </div>
     </section>
   </main>
 
-  <div class="toast" id="toast"></div>
+  <div class="vignette"></div>
+  <div class="scanlines"></div>
 
   <script src="script.js"></script>
 </body>
