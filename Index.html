@@ -3,103 +3,282 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Business Email Tutorial</title>
+  <title>Business Email Guide</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>Business Email Setup Guide</h1>
-    <p>Learn how to create professional business emails and add them to your website safely.</p>
-  </header>
+  <div class="progress-bar"></div>
 
-  <nav>
-    <a href="#what">What Is a Business Email?</a>
-    <a href="#create">How to Create One</a>
-    <a href="#website">Add It to Your Website</a>
-    <a href="#safe">Spam Protection</a>
-    <a href="#checklist">Checklist</a>
-  </nav>
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">B</div>
+      <div>
+        <h2>Business Mail</h2>
+        <p>Setup Guide</p>
+      </div>
+    </div>
 
-  <main>
-    <section id="what" class="card">
-      <h2>What Is a Business Email?</h2>
+    <nav class="toc">
+      <a href="#intro" class="active">Introduction</a>
+      <a href="#basics">Email Basics</a>
+      <a href="#setup">Setup Process</a>
+      <a href="#website">Website Placement</a>
+      <a href="#protection">Spam Protection</a>
+      <a href="#dns">DNS Records</a>
+      <a href="#checklist">Checklist</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <button class="theme-toggle" type="button" aria-label="Toggle theme">
+      Toggle Theme
+    </button>
+  </aside>
+
+  <main class="page">
+    <section class="hero" id="intro">
+      <span class="eyebrow">Professional Web Presence</span>
+
+      <h1>
+        Build a business email system that actually looks trustworthy.
+      </h1>
+
       <p>
-        A business email uses your domain name instead of a free email provider.
-        For example:
+        Learn how to create branded email addresses, connect them to your domain,
+        place them on your website, and protect them from spam.
       </p>
 
-      <div class="example">
-        contact@yourbusiness.com
+      <div class="hero-actions">
+        <a href="#setup" class="primary-btn">Start the Guide</a>
+        <a href="#website" class="secondary-btn">Website Examples</a>
+      </div>
+    </section>
+
+    <section class="panel" id="basics">
+      <div class="section-heading">
+        <span>01</span>
+        <h2>What a business email is</h2>
       </div>
 
       <p>
-        It looks more professional than something like yourbusiness@gmail.com.
+        A business email uses your own domain name instead of a free provider.
+        It makes your website, brand, and customer support look more legitimate.
       </p>
+
+      <div class="email-preview">
+        <span>contact</span>
+        <span>@</span>
+        <span>yourbusiness.com</span>
+      </div>
+
+      <div class="grid two-columns">
+        <article class="mini-card">
+          <h3>Good examples</h3>
+          <p>contact@yourbusiness.com</p>
+          <p>support@yourbusiness.com</p>
+          <p>hello@yourbusiness.com</p>
+        </article>
+
+        <article class="mini-card">
+          <h3>Weaker examples</h3>
+          <p>yourbusiness@gmail.com</p>
+          <p>businesshelp123@yahoo.com</p>
+          <p>officialstore2025@outlook.com</p>
+        </article>
+      </div>
     </section>
 
-    <section id="create" class="card">
-      <h2>How to Create a Business Email</h2>
+    <section class="panel" id="setup">
+      <div class="section-heading">
+        <span>02</span>
+        <h2>How to create one</h2>
+      </div>
 
-      <ol>
-        <li>Buy a domain name, like <strong>yourbusiness.com</strong>.</li>
-        <li>Choose an email host, such as Google Workspace, Microsoft 365, Zoho Mail, or your web host.</li>
-        <li>Create email accounts like <strong>support@</strong>, <strong>contact@</strong>, or <strong>sales@</strong>.</li>
-        <li>Update your domain DNS records using the instructions from your email provider.</li>
-        <li>Test sending and receiving emails.</li>
-      </ol>
+      <div class="steps">
+        <div class="step">
+          <strong>1</strong>
+          <div>
+            <h3>Buy a domain</h3>
+            <p>Choose a domain that matches your brand, like yourbusiness.com.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <strong>2</strong>
+          <div>
+            <h3>Pick an email host</h3>
+            <p>Use Google Workspace, Microsoft 365, Zoho Mail, Namecheap, or your website host.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <strong>3</strong>
+          <div>
+            <h3>Create inboxes</h3>
+            <p>Start with contact@, support@, billing@, or hello@ depending on your site.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <strong>4</strong>
+          <div>
+            <h3>Connect DNS records</h3>
+            <p>Add the records your email provider gives you so your domain knows where email should go.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <strong>5</strong>
+          <div>
+            <h3>Test everything</h3>
+            <p>Send test emails in both directions before putting the address on your website.</p>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section id="website" class="card">
-      <h2>How to Add Your Email to a Website</h2>
-
-      <p>You can add a clickable email link using this HTML:</p>
-
-      <pre><code>&lt;a href="mailto:contact@yourbusiness.com"&gt;contact@yourbusiness.com&lt;/a&gt;</code></pre>
-
-      <p>Example button:</p>
-
-      <a class="email-button" href="mailto:contact@yourbusiness.com">Email Us</a>
+    <section class="panel" id="website">
+      <div class="section-heading">
+        <span>03</span>
+        <h2>How to place it on your website</h2>
+      </div>
 
       <p>
-        You can also place your email in your footer, contact page, or support section.
+        The easiest way is to use a clickable mail link. This opens the visitor's
+        email app with your address already filled in.
       </p>
+
+      <div class="code-card">
+        <div class="code-top">
+          <span>HTML</span>
+          <button type="button" data-copy="mailto-code">Copy</button>
+        </div>
+
+        <pre id="mailto-code"><code>&lt;a href="mailto:contact@yourbusiness.com"&gt;
+  contact@yourbusiness.com
+&lt;/a&gt;</code></pre>
+      </div>
+
+      <div class="placement-grid">
+        <article>
+          <h3>Best places to show it</h3>
+          <p>Footer, contact page, support page, quote request page, and legal pages.</p>
+        </article>
+
+        <article>
+          <h3>Best button text</h3>
+          <p>Email Support, Contact Sales, Request a Quote, or Send Us a Message.</p>
+        </article>
+
+        <article>
+          <h3>What to avoid</h3>
+          <p>Do not paste your personal email everywhere unless you are fine with spam.</p>
+        </article>
+      </div>
     </section>
 
-    <section id="safe" class="card">
-      <h2>How to Avoid Spam</h2>
+    <section class="panel" id="protection">
+      <div class="section-heading">
+        <span>04</span>
+        <h2>How to reduce spam</h2>
+      </div>
 
       <p>
-        Posting your email directly on a website can attract spam bots.
-        Safer options include:
+        Bots scan websites for email addresses. A contact form or hidden reveal
+        button can reduce junk mail without making the site harder to use.
       </p>
 
-      <ul>
-        <li>Use a contact form instead of showing your email directly.</li>
-        <li>Write your email like <strong>contact [at] yourbusiness [dot] com</strong>.</li>
-        <li>Use JavaScript to reveal the email only when a user clicks a button.</li>
-        <li>Use spam filters from your email provider.</li>
-      </ul>
+      <div class="reveal-box">
+        <button type="button" data-reveal-email>Reveal Demo Email</button>
+        <p class="email-output">Email is hidden until someone clicks.</p>
+      </div>
 
-      <button id="revealBtn">Reveal Example Email</button>
-      <p id="hiddenEmail"></p>
+      <div class="code-card">
+        <div class="code-top">
+          <span>Safer Display</span>
+          <button type="button" data-copy="safe-email-code">Copy</button>
+        </div>
+
+        <pre id="safe-email-code"><code>&lt;button data-reveal-email&gt;Reveal Email&lt;/button&gt;
+&lt;p class="email-output"&gt;&lt;/p&gt;</code></pre>
+      </div>
     </section>
 
-    <section id="checklist" class="card">
-      <h2>Business Email Checklist</h2>
+    <section class="panel" id="dns">
+      <div class="section-heading">
+        <span>05</span>
+        <h2>DNS records you should know</h2>
+      </div>
+
+      <div class="record-list">
+        <article>
+          <h3>MX</h3>
+          <p>Tells the domain where incoming mail should be delivered.</p>
+        </article>
+
+        <article>
+          <h3>SPF</h3>
+          <p>Lists which servers are allowed to send mail for your domain.</p>
+        </article>
+
+        <article>
+          <h3>DKIM</h3>
+          <p>Adds a digital signature so receiving inboxes can verify your emails.</p>
+        </article>
+
+        <article>
+          <h3>DMARC</h3>
+          <p>Gives instructions for handling emails that fail SPF or DKIM checks.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel" id="checklist">
+      <div class="section-heading">
+        <span>06</span>
+        <h2>Launch checklist</h2>
+      </div>
 
       <div class="checklist">
-        <label><input type="checkbox"> I bought a domain name</label>
-        <label><input type="checkbox"> I created a professional email</label>
-        <label><input type="checkbox"> I tested the email</label>
-        <label><input type="checkbox"> I added it to my website</label>
-        <label><input type="checkbox"> I added spam protection</label>
+        <label><input type="checkbox" /> Domain purchased</label>
+        <label><input type="checkbox" /> Email host connected</label>
+        <label><input type="checkbox" /> Inbox created</label>
+        <label><input type="checkbox" /> MX records added</label>
+        <label><input type="checkbox" /> SPF, DKIM, and DMARC checked</label>
+        <label><input type="checkbox" /> Email added to website</label>
+        <label><input type="checkbox" /> Contact form tested</label>
+      </div>
+    </section>
+
+    <section class="panel" id="faq">
+      <div class="section-heading">
+        <span>07</span>
+        <h2>Common questions</h2>
+      </div>
+
+      <div class="faq">
+        <button class="faq-question" type="button">
+          Do I need a website before making a business email?
+        </button>
+        <div class="faq-answer">
+          No. You only need a domain and an email host. A website helps, but it is not required.
+        </div>
+
+        <button class="faq-question" type="button">
+          Should I use contact@ or support@?
+        </button>
+        <div class="faq-answer">
+          Use contact@ for general messages and support@ for customer help.
+        </div>
+
+        <button class="faq-question" type="button">
+          Is it safe to put my email directly on my website?
+        </button>
+        <div class="faq-answer">
+          It works, but it can attract spam. A form or reveal button is usually safer.
+        </div>
       </div>
     </section>
   </main>
-
-  <footer>
-    <p>Business Email Tutorial Website</p>
-  </footer>
 
   <script src="script.js"></script>
 </body>
